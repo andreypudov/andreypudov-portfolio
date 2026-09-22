@@ -1,0 +1,80 @@
+
+{
+  "$schema": "../schemas/album.schema.json",
+  "name": "Marie Chaiy",
+  "description": "",
+  "genre": "Portrait",
+  "cover": "/photographs/2026-06-27/2026-06-27_001.webp",
+  "items": [
+    {
+      "name": "Marie Chaiy",
+      "description": "Marie moves through Ciutadella Park’s sunlit galleries and quiet green spaces, her composed grace shaping each moment with calm, expressive clarity.",
+      "path": "/photographs/2026-06-27/2026-06-27_001.webp",
+      "orientation": "portrait",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_002.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_003.webp",
+      "orientation": "portrait",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_004.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_005.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_006.webp",
+      "orientation": "portrait",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_007.webp",
+      "orientation": "portrait",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_008.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_009.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_010.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    }
+  ]
+}

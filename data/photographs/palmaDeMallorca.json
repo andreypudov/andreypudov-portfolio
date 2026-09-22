@@ -1,0 +1,17 @@
+
+{
+  "$schema": "../schemas/album.schema.json",
+  "name": "Palma de Mallorca",
+  "description": "",
+  "genre": "Nature",
+  "cover": "/photographs/2026-08-12/2026-08-12_001.webp",
+  "items": [
+    {
+      "name": "Celestial Eclipse over Palma de Mallorca",
+      "description": "A solar eclipse illuminates crimson clouds above dark coastal ridges, casting radiant reflections across the tranquil Mediterranean Sea.",
+      "path": "/photographs/2026-08-12/2026-08-12_001.webp",
+      "orientation": "portrait",
+      "date": "2026-08-12"
+    }
+  ]
+}

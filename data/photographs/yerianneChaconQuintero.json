@@ -1,0 +1,79 @@
+{
+  "$schema": "../schemas/album.schema.json",
+  "name": "Yerianne Chacón Quintero",
+  "description": "",
+  "genre": "Portrait",
+  "cover": "/photographs/2026-06-27/2026-06-27_011.webp",
+  "items": [
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_011.webp",
+      "orientation": "portrait",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_012.webp",
+      "orientation": "portrait",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "Yerianne Chacón Quintero",
+      "description": "Yeri moves through the sunlit terraces and quiet greenery of Ciutadella Park, her calm presence shaping each moment with gentle color and poised serenity.",
+      "path": "/photographs/2026-06-27/2026-06-27_013.webp",
+      "orientation": "portrait",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_014.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_015.webp",
+      "orientation": "portrait",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_016.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_017.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_018.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_019.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-27/2026-06-27_020.webp",
+      "orientation": "landscape",
+      "date": "2026-06-27"
+    }
+  ]
+}

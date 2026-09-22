@@ -1,0 +1,233 @@
+{
+  "$schema": "../schemas/album.schema.json",
+  "name": "Conquering Asia 2",
+  "description": "",
+  "genre": "Street",
+  "cover": "/photographs/2026-01-22_03-08/2026-01-22_03-08_001.webp",
+  "items": [
+    {
+      "name": "Lanterns Before The New Year",
+      "description": "Silhouetted visitors pause before a vibrant wall of hand-painted lanterns, reflecting quiet anticipation as the New Year approaches.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_001.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_002.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_003.webp",
+      "orientation": "portrait",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_004.webp",
+      "orientation": "portrait",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_005.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_006.webp",
+      "orientation": "portrait",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Radiance Of The Wandering Star",
+      "description": "A graceful cosplayer stands poised in blue‑white finery, capturing a moment of quiet heroism amid Taipei’s vibrant FF46 festival.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_007.webp",
+      "orientation": "portrait",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Vanguard In Shadowed Vigil",
+      "description": "A determined cosplayer stands in dark armor, embodying unwavering resolve amid the vibrant energy of Taipei’s FF46 event.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_008.webp",
+      "orientation": "portrait",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Bloom Of Celestial Grace",
+      "description": "A radiant cosplayer stands adorned in delicate blue‑white motifs, embodying serene elegance amid the lively spirit of Taipei’s FF46 event.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_009.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Game Of Minds And Wings",
+      "description": "A striking figure balances intellect and instinct, presenting a chessboard beside a vigilant hawk amid the lively festival crowd.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_010.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Echoes Of Azure Resolve",
+      "description": "A poised cosplayer stands in luminous blue and white attire, embodying calm determination amid Taipei’s vibrant FF46 atmosphere.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_011.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Golden Whisper of Dawn",
+      "description": "A serene cosplayer stands poised in ornate gold‑trimmed attire, radiating quiet strength amid Taipei’s lively FF46 festival.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_012.webp",
+      "orientation": "portrait",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Guardian Of Quiet Resolve",
+      "description": "A composed cosplayer stands ready with a stylized weapon, blending gentle poise with determined energy amid Taipei’s FF46 festival.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_013.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Azure Poise In Enchanted Light",
+      "description": "A composed figure in vivid blue gazes calmly forward, embodying elegance and quiet confidence within a dreamlike forest setting.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_014.webp",
+      "orientation": "portrait",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Bound By Quiet Harmony",
+      "description": "Two figures stand back to back, their calm expressions and mirrored posture reflecting balance, trust, and an unspoken enduring connection.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_015.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_016.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Guardians Beneath The Umbrella",
+      "description": "Two poised characters rest beneath a dark umbrella, their contrasting colors and calm expressions suggesting loyalty, quiet strength, and shared purpose.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_017.webp",
+      "orientation": "portrait",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Framed In Red And White",
+      "description": "Two characters share a quiet moment of playful composure, their contrasting expressions reflecting friendship and imagination within Taipei’s vibrant cosplay culture.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_018.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "A Quiet Offering",
+      "description": "A composed figure presents a single white flower, their shared gaze conveying trust, tenderness, and an unspoken story between them.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_019.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Whisper Of The Forest Spirit",
+      "description": "A quiet, introspective figure with elfin features rests among roots, embodying a serene connection between fantasy and nature.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_020.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Crimson Challenge",
+      "description": "A red-haired character meets the viewer’s gaze with playful determination, extending a gesture of confidence amid the spirited atmosphere of FF46 in Taipei.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_021.webp",
+      "orientation": "portrait",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Whimsical Guardian In Green",
+      "description": "A playful, masked character with vivid green hair and elfin features gestures lightly, blending mystery, humor, and quiet confidence.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_022.webp",
+      "orientation": "portrait",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_023.webp",
+      "orientation": "portrait",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_024.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_025.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_026.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_027.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_028.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_029.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_030.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "Whispers Of A Winter Buried City",
+      "description": "A snow‑laden Cheboksary emerges in quiet, monumental stillness, revealing a season so heavy it reshaped streets, landmarks, and daily life.",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_031.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-01-22_03-08/2026-01-22_03-08_032.webp",
+      "orientation": "landscape",
+      "date": "2026-03-08"
+    }
+  ]
+}
