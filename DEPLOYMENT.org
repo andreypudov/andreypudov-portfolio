@@ -1,0 +1,140 @@
+* Deployment
+
+The website is deployed in two independent parts:
+
+1. the media bucket: photographs, drawings, site images and their variants,
+   uploaded from the local media directory (=../r2=) to Cloudflare R2 and
+   served from =https://media.andreypudov.com=,
+2. the website: HTML, CSS and scripts, built and published to GitHub Pages
+   by GitHub Actions on every push to =master=.
+
+Pages reference media by absolute URL, so upload new media *before*
+deploying pages that use it; otherwise the live site shows missing images
+until the upload is done. See [[file:DEVELOPMENT.org][DEVELOPMENT.org]] for the media directory layout
+and for building variants with =npm run media=.
+
+** Media bucket (Cloudflare R2)
+
+*** One-time setup
+
+**** Bucket and domain
+
+1. In the Cloudflare dashboard open /R2 Object Storage → Create bucket/ and
+   create a bucket named =media=.
+2. Open the bucket, then /Settings → Custom Domains → Connect Domain/, and
+   connect =media.andreypudov.com=. This makes the bucket publicly readable
+   under that domain; the default =r2.dev= URL can stay disabled.
+
+**** API token
+
+1. Open /R2 Object Storage → Manage R2 API Tokens → Create API token/.
+2. Choose the /Object Read & Write/ permission and apply it to the =media=
+   bucket only.
+3. After creating it, copy the *Access Key ID* and the *Secret Access Key*
+   (shown only once). The token value shown above them is a different
+   credential and does not work with rclone.
+4. The endpoint is the *S3 API* value in the /Account Details/ panel of the
+   R2 overview page, =https://<account-id>.r2.cloudflarestorage.com=, where
+   =<account-id>= is the /Account ID/ shown next to it. A bucket's own
+   settings page shows the same URL followed by the bucket name
+   (=…/media=); rclone needs it without the bucket.
+
+**** rclone
+
+Install rclone and create a remote named =Media= for the account:
+
+#+begin_src shell
+brew install rclone          # or: apt install rclone
+
+rclone config create Media s3 \
+  provider=Cloudflare \
+  access_key_id=<Access Key ID> \
+  secret_access_key=<Secret Access Key> \
+  endpoint=https://<account-id>.r2.cloudflarestorage.com \
+  acl=private \
+  no_check_bucket=true \
+  env_auth=false
+#+end_src
+
+| Setting                | Reason                                                                                   |
+|------------------------+------------------------------------------------------------------------------------------|
+| =endpoint=             | The account URL only; the bucket is named in each command (=Media:media=), never here.   |
+| =acl=private=          | R2 has no object ACLs; public access comes from the custom domain.                       |
+| =no_check_bucket=true= | A token scoped to one bucket may not create or list buckets, which rclone would try.    |
+| =env_auth=false=       | Use the keys above only, not =AWS_*= environment variables.                              |
+
+An existing remote is corrected the same way with
+=rclone config update Media <setting>=<value> …=. The keys are stored in
+plain text in =~/.config/rclone/rclone.conf=; =rclone config encryption set=
+protects that file with a password.
+
+Verify the setup by listing the bucket:
+
+#+begin_src shell
+rclone lsf Media:media --max-depth 1
+#+end_src
+
+With a token scoped to the bucket, =rclone lsd Media:= (listing all buckets)
+is expected to fail with =401 Unauthorized=; list the bucket itself instead.
+
+*** Uploading media
+
+After adding photographs and running =npm run media= (see
+[[file:DEVELOPMENT.org][DEVELOPMENT.org]]), remove system files and upload the media directory:
+
+#+begin_src shell
+sh ../r2/scripts/clean.sh
+rclone sync ../r2 Media:media --exclude '.DS_Store' --progress
+#+end_src
+
+- The destination must be =<remote>:<bucket>=. Without the colon rclone
+  treats =media= as a local directory and silently copies everything into
+  it.
+- Remote names are case-sensitive: =Media:=, not =media:=.
+- =--progress= shows the transfer; without it rclone prints nothing until it
+  finishes.
+- =sync= makes the bucket an exact mirror, deleting objects whose local file
+  was removed. =rclone copy= only adds and updates files.
+- Only new or changed files are transferred, by comparing size and
+  modification time, so repeated uploads are cheap.
+- =--dry-run= lists what would be transferred or deleted without doing it.
+- To keep the tooling out of the bucket, add
+  =--exclude 'scripts/**' --exclude 'manifest.*'=; the website only needs
+  =full/= and =thumbnails/=.
+
+Check that the bucket matches the media directory:
+
+#+begin_src shell
+rclone check ../r2 Media:media --one-way --exclude '.DS_Store'
+#+end_src
+
+*** Troubleshooting
+
+| Symptom                                   | Cause                                                                            |
+|-------------------------------------------+----------------------------------------------------------------------------------|
+| Nothing printed, a local =media/= appears | The destination lacks =Media:=; delete the local copy and add the remote name.  |
+| =401 Unauthorized=                        | Wrong or revoked keys, e.g. the token value used instead of the S3 keys.         |
+| =403 AccessDenied=                        | The token is not granted Object Read & Write on this bucket.                     |
+| =404 NoSuchBucket=                        | Wrong bucket name, or the bucket was included in =endpoint=.                     |
+| Images still missing on the site          | The custom domain is not connected, or the upload has not finished.              |
+
+** Website (GitHub Pages)
+
+Deployment is automated by =.github/workflows/deploy.yml=. Every push to
+=master= (or a manual run via /Actions → Deploy to GitHub Pages → Run
+workflow/) does the following:
+
+1. installs dependencies with =npm ci=,
+2. runs =npm run build= to produce the static site in =out/=,
+3. uploads =out/= as a Pages artifact and publishes it with
+   =actions/deploy-pages=.
+
+One-time repository setup: /Settings → Pages → Source: GitHub Actions/. The
+custom domain is taken from =public/CNAME=.
+
+The build output is never committed. =master= contains only sources;
+=out/= and =.next/= are ignored by git. Committing the output to
+=master= (as the previous Python engine did) would mix generated files with
+sources and produce noisy diffs, and pushing it to a =gh-pages= branch would
+store the output a second time, growing the repository with each
+deployment. A Pages artifact keeps the output outside git entirely.

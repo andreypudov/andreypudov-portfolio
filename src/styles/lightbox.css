@@ -1,0 +1,171 @@
+.lightbox {
+  .lightbox-entry {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: white;
+    flex-direction: column;
+    z-index: 1000;
+
+    &:target {
+      display: flex;
+    }
+
+    .header {
+      display: flex;
+      flex: 0 0 10%;
+      justify-content: center;
+      align-items: center;
+      color: var(--fg-primary);
+      font-size: var(--menu-font-size);
+
+      .close {
+        position: absolute;
+        right: var(--gap-lg);
+        color: var(--fg-primary);
+        text-align: center;
+        text-decoration: none;
+        font-size: 1.2rem;
+        z-index: 1001;
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    .content {
+      .nav {
+        width: var(--gap-xxl);
+        height: 100%;
+        font-size: 1rem;
+        color: var(--fg-primary);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+
+        &:hover {
+          color: var(--fg-secondary);
+        }
+
+        &.prev {
+          left: 0;
+          z-index: 0;
+        }
+
+        &.next {
+          right: 0;
+          z-index: 0;
+        }
+
+        &.prev, &.next {
+          &:before {
+            position: absolute;
+            z-index: -1;
+            content: '';
+            background: #ffffff40;
+            height: 32px;
+            width: 32px;
+            border-radius: 33px;
+          }
+        }
+      }
+
+      figure {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .image-wrapper {
+          padding: 0 var(--gap-xxl);
+          display: flex;
+          flex: 1;
+          height: 80vh;
+
+          @media (max-width: 576px) {
+            padding: 0;
+          }
+
+          img {
+            display: block;
+            object-fit: contain;
+            width: 100%;
+            height: 80vh;
+
+            /* hide the image until it is fully loaded */
+            font-size: 0;
+            color: transparent;
+            text-indent: -9999px;
+            line-height: 0;
+
+            ::before {
+              content: none !important;
+            }
+          }
+        }
+
+        .video-wrapper {
+          padding: 0 var(--gap-xxl);
+          display: flex;
+          flex: 1;
+          height: 80vh;
+
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-origin: content-box;
+          background-clip: content-box;
+          backdrop-filter: blur(10px);
+
+          iframe {
+            display: block;
+            object-fit: contain;
+            width: 100%;
+            height: 80vh;
+          }
+
+          &.bank-of-russia {
+            background-image: url('https://media.andreypudov.com/full/images/covers/bank_of_russia.webp');
+          }
+
+          &.bolshaya-pokrovskaya-street {
+            background-image: url('https://media.andreypudov.com/full/images/covers/bolshaya_pokrovskaya_street.webp');
+          }
+
+          &.kanavinsky-bridge {
+            background-image: url('https://media.andreypudov.com/full/images/covers/kanavinsky_bridge.webp');
+          }
+
+          &.maxim-gorky-square {
+            background-image: url('https://media.andreypudov.com/full/images/covers/maxim_gorky_square.webp');
+          }
+
+          &.switzerland-park {
+            background-image: url('https://media.andreypudov.com/full/images/covers/switzerland_park.webp');
+          }
+
+          &.zelenskiy-syezd-street {
+            background-image: url('https://media.andreypudov.com/full/images/covers/zelenskiy_syezd_street.webp');
+          }
+        }
+
+        figcaption {
+          height: 10vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          small {
+            display: block;
+            font-size: 0.8rem;
+            padding: 0 var(--gap-md);
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

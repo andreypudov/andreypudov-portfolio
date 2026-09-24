@@ -1,0 +1,227 @@
+* Development
+
+Source of the photography portfolio hosted at [[https://andreypudov.com][andreypudov.com]]. The site is a
+Next.js application exported as a fully static website and served by GitHub
+Pages. Next.js and React are used only at build time: the published pages are
+plain HTML and CSS, with a few small scripts where a page needs them.
+Photographs and other media are not part of this repository: they live in a
+separate media bucket (see [[*Media][Media]]).
+
+** Project structure
+
+| Path                  | Purpose                                                                 |
+|-----------------------+-------------------------------------------------------------------------|
+| =src/app/=            | Pages (App Router): home, =portfolio/=, =about/=, =contact/=, =ip/=, =time/= |
+| =src/app/sitemap.ts= | Generates =sitemap.xml= at build time, dated with the build              |
+| =src/components/layout/= | Shared layout: header, footer, analytics                             |
+| =src/components/ui/=  | Abstract UI blocks: carousel, feature/masonry/image grids, lightbox     |
+| =src/lib/=            | Build-time helpers: album metadata, media URLs and manifest, page metadata |
+| =src/styles/=         | Hand-written CSS, one file per abstract component, combined in =site.css= |
+| =data/photographs/=   | Album metadata (JSON): name, description, path, orientation, date       |
+| =data/schemas/=       | JSON schemas describing the album format                                |
+| =data/media-manifest.json= | Dimensions of every media file, copied from the media bucket        |
+| =public/=             | Files copied as is: =CNAME=, =robots.txt=, =.well-known/=                 |
+| =public/scripts/=     | Plain browser scripts: analytics, world clock (=/time=), network info (=/ip=) |
+| =scripts/=            | Build tooling: =strip-runtime.mjs=                                       |
+| =services/=           | Standalone Go services backing the =/ip= and =/time= pages              |
+| =.github/workflows/=  | GitHub Actions workflow that builds and deploys the site                |
+
+Pages select photographs by file name (e.g. =2025-12-06_015.webp=), see the
+=CAROUSEL= and =FEATURE_GRID= lists in =src/app/page.tsx= and =SECTIONS= in
+=src/app/portfolio/page.tsx=. At build time =src/lib/photographs.ts= resolves
+each name against =data/photographs/*.json= for its caption and looks up the
+dimensions of the image and its variants in =data/media-manifest.json=.
+Grids and other small images are served through =srcset=, so browsers
+download a downscaled variant instead of the original (see [[*Thumbnails][Thumbnails]]).
+
+** Development
+
+Requirements: Node.js 22 or newer and npm; ImageMagick and the media
+directory (=../r2=) only to add media.
+
+#+begin_src shell
+npm install          # install dependencies
+npm run dev          # development server on http://localhost:3000
+npm run typecheck    # TypeScript check without emitting files
+npm run media        # build variants of new media, update the manifest
+npm run build        # static export into out/, without the JS runtime
+#+end_src
+
+The project uses =output: 'export'=, so =next start= is not available. To
+preview the production build, serve the =out/= directory with any static
+server:
+
+#+begin_src shell
+npm run build
+npx serve out        # or: python3 -m http.server -d out 3000
+#+end_src
+
+Pages load media from =https://media.andreypudov.com=. To work on the site
+with a local copy of the media directory, serve it and point =MEDIA_URL= at
+it (stylesheet backgrounds still come from the production domain):
+
+#+begin_src shell
+npx serve ../r2 -l 8080 &
+MEDIA_URL=http://localhost:8080 npm run dev
+#+end_src
+
+*** Adding photographs
+
+1. Put the full-resolution image into =../r2/full/photographs/<album>/=.
+2. Describe the image in the matching =data/photographs/<album>.json=.
+3. Reference the file name in the page's list (homepage or portfolio).
+4. Run =npm run media= and commit the updated =data/media-manifest.json=.
+5. Upload the media directory to the bucket (see [[file:DEPLOYMENT.org][DEPLOYMENT.org]]) before
+   pushing the change.
+
+The build fails with an explicit error when a referenced photograph has no
+metadata or is missing from the manifest, so =npm run build= doubles as a
+check.
+
+** Static output without JavaScript
+
+=npm run build= runs =next build= and then, as npm's =postbuild= hook,
+=scripts/strip-runtime.mjs=. Every page is rendered completely at build
+time and links are plain =<a href>= elements, so each page lives in its own
+=<route>/index.html= and navigation never needs JavaScript, just like the
+previous site. The Next.js runtime would only hydrate React on pages that
+are already complete, so the script removes it:
+
+- =<script>= elements loading =/_next/= chunks, and the inline React Server
+  Components payload (a second copy of every page),
+- script preload hints, React hydration markers and the empty metadata
+  =<div hidden>=,
+- the JavaScript chunks, build manifests and client navigation data
+  (=*.txt=) that nothing references afterwards.
+
+The stylesheet (=/_next/static/chunks/*.css=) and scripts from
+=public/scripts/= are kept. The script then verifies every page and fails
+the build if any runtime reference remains, so a change in the Next.js
+output format cannot ship half-stripped pages. This removes about 560 KB of
+JavaScript from every page and roughly two thirds of the HTML (the homepage
+goes from 255 KB to 93 KB).
+
+Consequently, components must not rely on client-side React: no ='use
+client'=, hooks, event handlers or =next/link=. Behaviour that needs the
+browser is written as a plain script in =public/scripts/= and included by
+the component with =<script type="module" src="/scripts/…">=; the component
+renders the markup the script fills in (see =WorldClock.tsx= and
+=world-clock.js=). Elements the script changes are marked with
+=suppressHydrationWarning=, because =npm run dev= still hydrates the pages.
+
+** Media
+
+Photographs, drawings and site images are kept outside the repository in a
+media directory, by default =../r2= next to this project (override with
+=R2_DIRECTORY=). Its whole content is published in a Cloudflare R2 bucket
+served from =https://media.andreypudov.com=, so the bucket has the same
+layout:
+
+| Path                        | Content                                                            |
+|-----------------------------+--------------------------------------------------------------------|
+| =full/=                     | Originals only: =photographs/=, =drawings/=, =images/=             |
+| =thumbnails/=               | Downscaled variants, mirroring the structure of =full/=            |
+| =scripts/build-thumbnails.sh= | Builds the variants and the manifest (see [[*Thumbnails][Thumbnails]])       |
+| =scripts/profiles/sRGB.icc= | Colour profile the variants are converted into                     |
+| =manifest.tsv=              | Index of processed images, used to skip them on the next run       |
+| =manifest.json=             | Dimensions of every original and its variants                     |
+
+=npm run media= runs the script and copies =manifest.json= into
+=data/media-manifest.json=, which is committed. The build reads only that
+manifest, so neither CI nor a fresh checkout needs the media directory or
+ImageMagick. =src/lib/media.ts= builds the URLs: =MEDIA_URL= followed by
+=/full/<path>= for originals and =/thumbnails/<path>_<suffix>.webp= for
+variants. Stylesheets cannot read =MEDIA_URL=, so their background images use
+the absolute production URL.
+
+** Thumbnails
+
+=../r2/scripts/build-thumbnails.sh= is a POSIX shell script built on
+ImageMagick (version 7 =magick=, or version 6 =convert= and =identify=). It
+replaces the thumbnail step of the previous Python engine.
+
+#+begin_src shell
+npm run media                                   # build variants of new images
+sh ../r2/scripts/build-thumbnails.sh photographs/2023-11-18/2023-11-18_020.webp
+sh ../r2/scripts/build-thumbnails.sh -f         # regenerate every variant
+sh ../r2/scripts/build-thumbnails.sh -j 4       # limit parallel conversions
+#+end_src
+
+The script considers every =.webp= in =full/=; working files in other
+formats (e.g. =drawings/*/raw/=), logos and icons are left alone. An image is
+converted only when it is missing from =manifest.tsv= or one of its variants
+does not exist, so a run after adding photographs only processes those.
+Images removed from =full/= drop out of the manifest. Conversions run in
+parallel (one per CPU by default), and a failing image is reported and left
+out of the manifest without stopping the others.
+
+*** Variants
+
+| File                 | Size                        | Used for                                     |
+|----------------------+-----------------------------+----------------------------------------------|
+| =<name>_300.webp=    | fits into 300×300           | low-quality placeholder shown while loading  |
+| =<name>_400w.webp=   | 400px wide                  | =srcset= candidate                           |
+| =<name>_800w.webp=   | 800px wide                  | =srcset= candidate                           |
+| =<name>_1200w.webp=  | 1200px wide                 | =srcset= candidate                           |
+| original             | 2048px long edge            | last =srcset= candidate, carousel, lightbox  |
+
+Variants live in =thumbnails/= at the same relative path as their original
+in =full/= (e.g. =full/images/covers/x.webp= → =thumbnails/images/covers/x_800w.webp=).
+Variants that would be as wide as the original or wider are not created.
+
+The widths follow the layouts: grid tiles are rendered 200–380 CSS pixels
+wide on desktops and up to the full screen width on phones, so 400px covers
+standard displays, 800px high-density displays and 1200px phones rendering a
+single column at 3× density. Each component states its rendered width in a
+=sizes= attribute (derived from its stylesheet) and the browser picks the
+smallest sufficient candidate. The carousel fills the viewport height, which
+=sizes= cannot express, and the lightbox shows photographs at full size, so
+both keep the original. The widths are defined in the script (=WIDTHS=)
+only: the website takes the available variants from the manifest.
+
+*** Conversion settings
+
+| Setting                                  | Reason                                                                                                 |
+|------------------------------------------+--------------------------------------------------------------------------------------------------------|
+| =-auto-orient=                           | Applies the EXIF orientation before the metadata is stripped.                                         |
+| =-intent Relative -black-point-compensation -profile sRGB.icc= | Converts wide-gamut originals into sRGB (see below).                            |
+| =-strip=                                 | Removes EXIF, XMP and ICC data: about 37 KB per file, including camera serial numbers and locations.   |
+| =-filter Lanczos -resize=                | Sharp downscaling without visible ringing; =>= and the width checks prevent upscaling.                 |
+| =-quality 85=                            | Balance between size and fidelity chosen by measurement (see below).                                  |
+| =-define webp:method=6=                  | Slowest, most thorough encoder search: smaller files at the same quality, only paid once per image.    |
+| =-define webp:use-sharp-yuv=true=        | More accurate RGB→YUV conversion that keeps saturated colour edges crisp, for about 5% more bytes.     |
+
+*Colour management.* Most originals are sRGB, but about 170 of them carry
+Adobe RGB, ProPhoto RGB or Display P3 profiles. Stripping the profile of such
+an image without converting it makes browsers interpret it as sRGB, and it
+looks washed out: on a ProPhoto RGB sample the mean saturation dropped from
+0.24 to 0.14. The script therefore converts every image into sRGB first,
+using relative colorimetric intent with black point compensation (the
+intent supported by the matrix-based profiles involved), and only then strips
+the profile. The sRGB IEC61966-2.1 profile is stored in
+=scripts/profiles/sRGB.icc= so the conversion does not depend on system
+paths. The originals keep their profiles, so the lightbox remains
+colour-managed.
+
+*Quality.* Measured on five representative photographs against a lossless
+downscale (SSIM, higher is better):
+
+| Quality         | 400w size | 800w size | 800w SSIM |
+|-----------------+-----------+-----------+-----------|
+| 75              | 21 KB     | 72 KB     | 0.973     |
+| 80              | 26 KB     | 88 KB     | 0.978     |
+| 80 + sharp YUV  | 28 KB     | 92 KB     | 0.979     |
+| 85 + sharp YUV  | 34 KB     | 112 KB    | 0.982     |
+| 88 + sharp YUV  | 39 KB     | 130 KB    | 0.985     |
+| 90              | 40 KB     | 140 KB    | 0.985     |
+
+85 with sharp YUV is where further quality costs noticeably more bytes for
+little visible gain, while staying close to the originals (exported at 92).
+An 800px variant is about a fifth of its original (~550 KB). Sharpening
+after resizing (=-unsharp=) was evaluated and left out: it grew files by
+about 25% and moved them further from the source.
+
+** Deployment
+
+Uploading media to the Cloudflare R2 bucket (with rclone) and publishing the
+website to GitHub Pages are described in [[file:DEPLOYMENT.org][DEPLOYMENT.org]].

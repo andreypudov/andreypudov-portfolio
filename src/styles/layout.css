@@ -1,0 +1,101 @@
+@import url("header.css");
+@import url("footer.css");
+
+:root {
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-weight: 400;
+  --line-height: 1.5;
+  --letter-spacing: 0.05em;
+
+  --font-size-primary: 0.9rem;
+  --font-size-large: 1.8rem;
+  --font-size-header: 1.33rem;
+  --menu-font-size: 0.8rem;
+  --subscript-font-size: 0.74rem;
+
+  --bg-primary: white;
+  --bg-secondary: #fafafc;
+  --bg-third: #f5f5f7;
+
+  --fg-primary: #212529;
+  --fg-secondary: #6e6e6e;
+  --fg-inverted: white;
+
+  --gap-sm: 8px;
+  --gap-md: 16px;
+  --gap-lg: 24px;
+  --gap-xl: 32px;
+  --gap-xxl: 64px;
+
+  --transition: 0.4s;
+  --scale: 1.04;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+
+  background-color: var(--bg-primary);
+  color: var(--fg-primary);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+main {
+  padding-top: var(--gap-md);
+
+  h1 {
+    font-size: var(--font-size-header);
+    font-weight: 500;
+    margin-top: var(--gap-md);
+    margin-bottom: calc(var(--gap-md) * 1.4);
+
+    &:not(:first-child) {
+      margin-top: calc(var(--gap-md) * 2.2);
+    }
+  }
+
+  p {
+    font-weight: 400;
+    line-height: calc(var(--line-height) * 1.02);
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+.container {
+  margin: 0 auto var(--gap-md) auto;
+  max-width: 1140px;
+
+  @media (max-width: 1200px) {
+    max-width: 960px;
+  }
+
+  @media (max-width: 992px) {
+    max-width: 720px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 540px;
+  }
+
+  @media (max-width: 576px) {
+    max-width: 100%;
+  }
+}
+
+.container-fluid {
+  margin: 0 var(--gap-md) var(--gap-md) var(--gap-md);
+}

@@ -1,0 +1,23 @@
+/*
+ * Aggregates all hand-written component stylesheets into the single
+ * stylesheet compiled by the build into one content-hashed CSS file.
+ */
+
+/* Shared layout (imports header.css and footer.css). */
+@import url("layout.css");
+@import url("lazy-image.css");
+
+/* Abstract components. */
+@import url("carousel.css");
+@import url("feature-grid.css");
+@import url("masonry-grid.css");
+@import url("image-grid.css");
+@import url("lightbox.css");
+@import url("parallax.css");
+
+/* Pages. */
+@import url("curriculum-vitae.css");
+@import url("contact.css");
+@import url("time.css");
+@import url("ip.css");
+@import url("not-found.css");
