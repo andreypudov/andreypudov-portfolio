@@ -61,7 +61,7 @@ export default function ContactPage() {
           </div>
 
           <div className="image">
-            <LazyImage image={portrait} priority />
+            <LazyImage image={portrait} priority sizes="(max-width: 1200px) 50vw, 570px" />
           </div>
         </div>
 

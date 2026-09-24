@@ -35,7 +35,15 @@ export interface Photograph {
   thumbnailSrc: string;
   thumbnailWidth: number;
   thumbnailHeight: number;
+  /** Width-descriptor candidates: downscaled variants plus the original. */
+  srcSet: string;
 }
+
+/**
+ * Widths of the downscaled variants built by scripts/build-thumbnails.sh.
+ * Keep in sync with WIDTHS in that script.
+ */
+const VARIANT_WIDTHS = [400, 800, 1200];
 
 let metadataIndex: Map<string, AlbumItem> | undefined;
 const dimensionsCache = new Map<string, ImageDimensions>();
@@ -72,29 +80,50 @@ function dimensions(mediaSrc: string): ImageDimensions {
 }
 
 /**
- * Derives the thumbnail location for a media path. Photographs have mirrored
- * thumbnails under /media/thumbnails, other images keep them alongside.
+ * Derives the location of a downscaled variant of a media path. Photographs
+ * have them mirrored under /media/thumbnails, other images keep them alongside.
  */
-function thumbnailPath(mediaPath: string): string {
-  const withSuffix = mediaPath.replace(/\.webp$/, '_300.webp');
+function variantPath(mediaPath: string, suffix: string): string {
+  const withSuffix = mediaPath.replace(/\.webp$/, `_${suffix}.webp`);
 
   return withSuffix.startsWith('/photographs/')
     ? `/thumbnails${withSuffix.slice('/photographs'.length)}`
     : withSuffix;
 }
 
+/**
+ * Lists the srcset candidates of an image: every variant narrower than the
+ * original, then the original itself. Fails the build when a variant has
+ * not been generated yet.
+ */
+function sourceSet(mediaPath: string, width: number): string {
+  const candidates = VARIANT_WIDTHS.filter((variantWidth) => variantWidth < width).map((variantWidth) => {
+    const src = `/media${variantPath(mediaPath, `${variantWidth}w`)}`;
+    if (!fs.existsSync(path.join(PUBLIC_DIRECTORY, src))) {
+      throw new Error(`Missing image variant "${src}", run "npm run thumbnails"`);
+    }
+    return `${src} ${variantWidth}w`;
+  });
+
+  return [...candidates, `/media${mediaPath} ${width}w`].join(', ');
+}
+
 function resolve(mediaPath: string, name: string, description: string): Photograph {
   const src = `/media${mediaPath}`;
-  const thumbnailSrc = `/media${thumbnailPath(mediaPath)}`;
+  const { width, height } = dimensions(src);
+  const thumbnailSrc = `/media${variantPath(mediaPath, '300')}`;
+  const thumbnail = dimensions(thumbnailSrc);
 
   return {
     name,
     description,
     src,
-    ...dimensions(src),
+    width,
+    height,
     thumbnailSrc,
-    thumbnailWidth: dimensions(thumbnailSrc).width,
-    thumbnailHeight: dimensions(thumbnailSrc).height,
+    thumbnailWidth: thumbnail.width,
+    thumbnailHeight: thumbnail.height,
+    srcSet: sourceSet(mediaPath, width),
   };
 }
 

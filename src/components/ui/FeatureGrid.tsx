@@ -9,6 +9,12 @@ interface FeatureGridProps {
 }
 
 /**
+ * Rendered tile width: a third of the .container width (see layout.css and
+ * feature-grid.css), a single column below 768px.
+ */
+const SIZES = '(max-width: 576px) 100vw, (max-width: 768px) 540px, (max-width: 992px) 240px, (max-width: 1200px) 320px, 380px';
+
+/**
  * A three-column grid of photographs. Tile identifiers are derived from the
  * global collection index so that every tile links to its lightbox entry.
  */
@@ -22,7 +28,7 @@ export default function FeatureGrid({ photographs, columns }: FeatureGridProps) 
             return (
               <figure key={id}>
                 <a id={`feature-grid-${id}`} href={`#lightbox-${id}`}>
-                  <LazyImage image={photograph} />
+                  <LazyImage image={photograph} sizes={SIZES} />
                 </a>
               </figure>
             );

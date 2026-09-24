@@ -131,7 +131,7 @@ export default function HomePage() {
 
         <Parallax variant="about">
           <div className="image">
-            <LazyImage image={portrait} />
+            <LazyImage image={portrait} sizes="(max-width: 1200px) 30vw, 340px" />
           </div>
           <div className="text">
             <h1>Meet Andrey</h1>
