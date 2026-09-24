@@ -141,6 +141,7 @@ export default function PortfolioPage() {
   return (
     <>
       <Header
+        current="/portfolio/"
         secondaryItems={sections.map((section) => ({
           href: `#${section.id}`,
           label: section.title,

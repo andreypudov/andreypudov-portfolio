@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <Header />
+      <Header current="/about/" />
 
       <main>
         <div className="curriculum-vitae container">

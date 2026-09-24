@@ -3,12 +3,16 @@ import { Fragment } from 'react';
 import LazyImage from './LazyImage';
 import type { Photograph } from '@/lib/photographs';
 
-/** Number of slide indicators shown, matching the original design. */
+/**
+ * Number of slide indicators shown, matching the original design
+ * (carousel.css styles the keyboard focus of each of them).
+ */
 const INDICATOR_COUNT = 5;
 
 /**
- * Full-screen, CSS-only slideshow. Slides are switched through hidden radio
- * inputs whose labels act as indicators (see carousel.css).
+ * Full-screen, CSS-only slideshow. Slides are switched through visually
+ * hidden radio inputs whose labels act as indicators (see carousel.css).
+ * The radios stay focusable, so the arrow keys switch slides as well.
  */
 export default function Carousel({ photographs }: { photographs: Photograph[] }) {
   return (
@@ -22,7 +26,7 @@ export default function Carousel({ photographs }: { photographs: Photograph[] })
         </div>
       </div>
 
-      <div className="inner">
+      <div className="inner" role="group" aria-label="Featured photographs">
         {photographs.map((photograph, index) => (
           <Fragment key={photograph.src}>
             <input
@@ -30,8 +34,7 @@ export default function Carousel({ photographs }: { photographs: Photograph[] })
               type="radio"
               id={`carousel-${index + 1}`}
               name="carousel"
-              aria-hidden="true"
-              hidden
+              aria-label={photograph.name || `Photograph ${index + 1}`}
               defaultChecked={index === 0 || undefined}
             />
             <div className="item">

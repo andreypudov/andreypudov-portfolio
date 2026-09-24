@@ -35,10 +35,10 @@ export default function LightboxEntry({
     <div className="lightbox-entry" id={`${entryPrefix}-${index + 1}`}>
       <div className="header">
         <span className="counter">{index + 1} / {length}</span>
-        <a href={`#${tilePrefix}-${index + 1}`} className="close">&times;</a>
+        <a href={`#${tilePrefix}-${index + 1}`} className="close" aria-label="Close">&times;</a>
       </div>
       <div className="content">
-        <a href={`#${entryPrefix}-${previous}`} className="nav prev">&#10094;</a>
+        <a href={`#${entryPrefix}-${previous}`} className="nav prev" aria-label="Previous">&#10094;</a>
         <figure>
           {children}
           <figcaption>
@@ -46,7 +46,7 @@ export default function LightboxEntry({
             <small>{description}</small>
           </figcaption>
         </figure>
-        <a href={`#${entryPrefix}-${next}`} className="nav next">&#10095;</a>
+        <a href={`#${entryPrefix}-${next}`} className="nav next" aria-label="Next">&#10095;</a>
       </div>
     </div>
   );

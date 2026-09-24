@@ -119,7 +119,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Header variant="home" />
+      <Header variant="home" current="/" />
 
       <main>
         <Carousel photographs={carousel} />

@@ -92,6 +92,15 @@
     width: 100%;
 
     .open {
+      /* Visually hidden but focusable, so the slides can be switched with the keyboard. */
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+
       &:checked {
         + .item {
           position: static;
@@ -138,6 +147,18 @@
         object-fit: cover;
         height: calc(100vh + 40px);
         width: 100%;
+      }
+    }
+
+    /* The radios are invisible, so the indicator of the focused slide shows the keyboard focus. */
+    &:has(#carousel-1:focus-visible) .indicators li:nth-child(1),
+    &:has(#carousel-2:focus-visible) .indicators li:nth-child(2),
+    &:has(#carousel-3:focus-visible) .indicators li:nth-child(3),
+    &:has(#carousel-4:focus-visible) .indicators li:nth-child(4),
+    &:has(#carousel-5:focus-visible) .indicators li:nth-child(5) {
+      .bullet {
+        outline: 1px solid var(--fg-inverted);
+        outline-offset: 4px;
       }
     }
 

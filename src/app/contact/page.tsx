@@ -38,7 +38,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <Header />
+      <Header current="/contact/" />
 
       <main>
         <div className="contact container">

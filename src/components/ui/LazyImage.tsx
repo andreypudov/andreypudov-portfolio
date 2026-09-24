@@ -29,7 +29,7 @@ export default function LazyImage({ image, priority = false, sizes }: LazyImageP
         loading="lazy"
         width={image.thumbnailWidth}
         height={image.thumbnailHeight}
-        alt={image.description}
+        alt=""
       />
       <img
         src={image.src}
