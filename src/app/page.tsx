@@ -7,7 +7,7 @@ import LazyImage from '@/components/ui/LazyImage';
 import Lightbox from '@/components/ui/Lightbox';
 import Parallax from '@/components/ui/Parallax';
 import VideoLightbox, { type Video } from '@/components/ui/VideoLightbox';
-import { getImage, getPhotograph, getPhotographs } from '@/lib/photographs';
+import { getImage, getPhotographs, getSelfPortrait } from '@/lib/photographs';
 
 const CAROUSEL = [
   '2026-01-22_03-08_001.webp',
@@ -115,10 +115,7 @@ export default function HomePage() {
   const carousel = getPhotographs(CAROUSEL);
   const featureGrid = getPhotographs(FEATURE_GRID);
   const covers = TIMELAPSE_COVERS.map((cover) => getImage(cover.path, cover.name));
-  const portrait = getImage(
-    '/photographs/2016-04-16/2016-04-16_002.webp',
-    'A contemplative self-portrait capturing the artist’s gaze and presence, offering a personal glimpse into his creative identity.',
-  );
+  const portrait = getSelfPortrait();
 
   return (
     <>

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import LazyImage from '@/components/ui/LazyImage';
-import { getImage } from '@/lib/photographs';
+import { getSelfPortrait } from '@/lib/photographs';
 
 export const metadata: Metadata = {
   title: 'Contact - Andrey Pudov',
@@ -34,10 +34,7 @@ Jkusbiyw7298jUjl+MtjLTGCOchvnO21cA0/JgD/esrVwprrFqqBgAISybsafmj7
 -----END PGP PUBLIC KEY BLOCK-----`;
 
 export default function ContactPage() {
-  const portrait = getImage(
-    '/photographs/2016-04-16/2016-04-16_002.webp',
-    'A contemplative self-portrait capturing the artist’s gaze and presence, offering a personal glimpse into his creative identity.',
-  );
+  const portrait = getSelfPortrait();
 
   return (
     <>

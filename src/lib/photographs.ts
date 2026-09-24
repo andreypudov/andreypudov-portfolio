@@ -152,3 +152,11 @@ export function getPhotographs(fileNames: string[]): Photograph[] {
 export function getImage(mediaPath: string, description: string, name = ''): Photograph {
   return resolve(mediaPath, name, description);
 }
+
+/** The photographer's self-portrait shown on the home and contact pages. */
+export function getSelfPortrait(): Photograph {
+  return getImage(
+    '/photographs/2016-04-16/2016-04-16_002.webp',
+    'A contemplative self-portrait capturing the artist’s gaze and presence, offering a personal glimpse into his creative identity.',
+  );
+}

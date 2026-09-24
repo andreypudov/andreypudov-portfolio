@@ -92,7 +92,7 @@ export default function Footer({ priority = false }: FooterProps) {
       </div>
 
       <div className="copyright">
-        Copyright © 2026 Andrey Pudov
+        Copyright © {new Date().getFullYear()} Andrey Pudov
       </div>
     </footer>
   );
