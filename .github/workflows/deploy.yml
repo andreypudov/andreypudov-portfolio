@@ -1,5 +1,13 @@
 name: Deploy to GitHub Pages
 
+# The repository root holds the Next.js sources, not the website, so GitHub
+# Pages cannot serve it directly ("Deploy from a branch" only supports / or
+# /docs). Instead this workflow builds the site and hands the generated out/
+# directory to Pages.
+#
+# Required repository setting: Settings -> Pages -> Build and deployment ->
+# Source: GitHub Actions.
+
 on:
   push:
     branches: [master]
@@ -34,6 +42,7 @@ jobs:
       - name: Build static site
         run: npm run build
 
+      # The website served by GitHub Pages: the static export of `next build`.
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
