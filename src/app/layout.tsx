@@ -19,8 +19,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en-US">
       <body>
-        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
-
         <Analytics />
 
         <Loader />

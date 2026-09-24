@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/strip-runtime.mjs",
     "thumbnails": "sh scripts/build-thumbnails.sh",
     "typecheck": "tsc --noEmit"
   },

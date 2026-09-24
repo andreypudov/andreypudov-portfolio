@@ -1,19 +1,3 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-
-const NETWORK_SERVICE_URL = 'https://networkinfo-service-652878720259.europe-central2.run.app';
-
-interface NetworkInfo {
-  public_ip?: string;
-  user_agent?: string;
-  city?: string;
-  region?: string;
-  country?: string;
-  latitude?: string | number;
-  longitude?: string | number;
-}
-
 const CLIENT_ROWS = [
   { id: 'ip', label: 'Public IP', field: 'public_ip' },
   { id: 'user-agent', label: 'User Agent', field: 'user_agent' },
@@ -29,49 +13,18 @@ const LOCATION_ROWS = [
 
 type Row = (typeof CLIENT_ROWS | typeof LOCATION_ROWS)[number];
 
-async function getNetworkInfo(): Promise<NetworkInfo | null> {
-  try {
-    const response = await fetch(NETWORK_SERVICE_URL, {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Network response was not ok: ${response.statusText}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching network info:', error);
-    return null;
-  }
-}
-
-/** The visitor's public IP address and approximate location. */
+/**
+ * The visitor's public IP address and approximate location, filled in by
+ * public/scripts/network-information.js.
+ */
 export default function NetworkInformation() {
-  const [info, setInfo] = useState<NetworkInfo | null>();
-
-  useEffect(() => {
-    let cancelled = false;
-
-    getNetworkInfo().then((result) => {
-      if (!cancelled) {
-        setInfo(result);
-      }
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   const rows = (definitions: readonly Row[]) =>
     definitions.map((row) => (
       <div className="row" key={row.id}>
         <span className="label">
           <strong>{row.label}</strong>
         </span>
-        <span className="value" id={row.id}>{info ? info[row.field] || 'N/A' : '---'}</span>
+        <span className="value" id={row.id} data-field={row.field} suppressHydrationWarning>---</span>
       </div>
     ));
 
@@ -88,6 +41,8 @@ export default function NetworkInformation() {
       <section className="location">
         {rows(LOCATION_ROWS)}
       </section>
+
+      <script type="module" src="/scripts/network-information.js"></script>
     </div>
   );
 }

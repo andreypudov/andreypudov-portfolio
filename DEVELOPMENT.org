@@ -1,8 +1,9 @@
 * Development
 
 Source of the photography portfolio hosted at [[https://andreypudov.com][andreypudov.com]]. The site is a
-Next.js application exported as a fully static website (pure HTML and CSS,
-no client-side framework rendering) and served by GitHub Pages.
+Next.js application exported as a fully static website and served by GitHub
+Pages. Next.js and React are used only at build time: the published pages are
+plain HTML and CSS, with a few small scripts where a page needs them.
 
 ** Project structure
 
@@ -17,7 +18,8 @@ no client-side framework rendering) and served by GitHub Pages.
 | =data/schemas/=       | JSON schemas describing the album format                                |
 | =public/media/=       | Full-resolution photographs, =thumbnails/= (downscaled variants), other images |
 | =public/=             | Files copied as is: =CNAME=, =robots.txt=, =sitemap.xml=, =.well-known/=  |
-| =scripts/=            | =build-thumbnails.sh= and the sRGB colour profile it converts into       |
+| =public/scripts/=     | Plain browser scripts: analytics, world clock (=/time=), network info (=/ip=) |
+| =scripts/=            | Build tooling: =build-thumbnails.sh= (with its sRGB profile), =strip-runtime.mjs= |
 | =services/=           | Standalone Go services backing the =/ip= and =/time= pages              |
 | =.github/workflows/=  | GitHub Actions workflow that builds and deploys the site                |
 
@@ -39,7 +41,7 @@ npm install          # install dependencies
 npm run dev          # development server on http://localhost:3000
 npm run typecheck    # TypeScript check without emitting files
 npm run thumbnails   # build missing image variants (see Thumbnails)
-npm run build        # static export into out/
+npm run build        # static export into out/, without the JS runtime
 #+end_src
 
 The project uses =output: 'export'=, so =next start= is not available. To
@@ -62,6 +64,37 @@ npx serve out        # or: python3 -m http.server -d out 3000
 The build fails with an explicit error when a referenced photograph has no
 metadata, or when its file or one of its variants is missing, so
 =npm run build= doubles as a check.
+
+** Static output without JavaScript
+
+=npm run build= runs =next build= and then, as npm's =postbuild= hook,
+=scripts/strip-runtime.mjs=. Every page is rendered completely at build
+time and links are plain =<a href>= elements, so each page lives in its own
+=<route>/index.html= and navigation never needs JavaScript, just like the
+previous site. The Next.js runtime would only hydrate React on pages that
+are already complete, so the script removes it:
+
+- =<script>= elements loading =/_next/= chunks, and the inline React Server
+  Components payload (a second copy of every page),
+- script preload hints, React hydration markers and the empty metadata
+  =<div hidden>=,
+- the JavaScript chunks, build manifests and client navigation data
+  (=*.txt=) that nothing references afterwards.
+
+The stylesheet (=/_next/static/chunks/*.css=) and scripts from
+=public/scripts/= are kept. The script then verifies every page and fails
+the build if any runtime reference remains, so a change in the Next.js
+output format cannot ship half-stripped pages. This removes about 560 KB of
+JavaScript from every page and roughly two thirds of the HTML (the homepage
+goes from 255 KB to 93 KB).
+
+Consequently, components must not rely on client-side React: no ='use
+client'=, hooks, event handlers or =next/link=. Behaviour that needs the
+browser is written as a plain script in =public/scripts/= and included by
+the component with =<script type="module" src="/scripts/…">=; the component
+renders the markup the script fills in (see =WorldClock.tsx= and
+=world-clock.js=). Elements the script changes are marked with
+=suppressHydrationWarning=, because =npm run dev= still hydrates the pages.
 
 ** Thumbnails
 
