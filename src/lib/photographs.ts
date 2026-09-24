@@ -1,10 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { webpDimensions, type ImageDimensions } from './webp';
+import { manifestEntry, mediaUrl, variantUrl } from './media';
 
 const DATA_DIRECTORY = path.join(process.cwd(), 'data', 'photographs');
-const PUBLIC_DIRECTORY = path.join(process.cwd(), 'public');
 
 interface AlbumItem {
   name: string;
@@ -41,14 +40,7 @@ export interface Photograph {
   variants: ImageSource[];
 }
 
-/**
- * Widths of the downscaled variants built by scripts/build-thumbnails.sh.
- * Keep in sync with WIDTHS in that script.
- */
-const VARIANT_WIDTHS = [400, 800, 1200];
-
 let metadataIndex: Map<string, AlbumItem> | undefined;
-const dimensionsCache = new Map<string, ImageDimensions>();
 
 /** Indexes every album item in /data/photographs by image file name. */
 function loadMetadataIndex(): Map<string, AlbumItem> {
@@ -72,56 +64,25 @@ function loadMetadataIndex(): Map<string, AlbumItem> {
   return metadataIndex;
 }
 
-function dimensions(mediaSrc: string): ImageDimensions {
-  let cached = dimensionsCache.get(mediaSrc);
-  if (!cached) {
-    cached = webpDimensions(path.join(PUBLIC_DIRECTORY, mediaSrc));
-    dimensionsCache.set(mediaSrc, cached);
-  }
-  return cached;
-}
-
-function imageSource(src: string): ImageSource {
-  return { src, ...dimensions(src) };
-}
-
 /**
- * Derives the location of a downscaled variant of a media path. Photographs
- * have them mirrored under /media/thumbnails, other images keep them alongside.
+ * Resolves an image of the media directory (e.g. "/photographs/…/x.webp")
+ * into its original, placeholder and srcset variants, using the dimensions
+ * recorded in the media manifest.
  */
-function variantPath(mediaPath: string, suffix: string): string {
-  const withSuffix = mediaPath.replace(/\.webp$/, `_${suffix}.webp`);
-
-  return withSuffix.startsWith('/photographs/')
-    ? `/thumbnails${withSuffix.slice('/photographs'.length)}`
-    : withSuffix;
-}
-
-/**
- * Lists every variant narrower than the original, then the original itself.
- * Fails the build when a variant has not been generated yet.
- */
-function variants(mediaPath: string, original: ImageSource): ImageSource[] {
-  const downscaled = VARIANT_WIDTHS.filter((variantWidth) => variantWidth < original.width).map((variantWidth) => {
-    const src = `/media${variantPath(mediaPath, `${variantWidth}w`)}`;
-    if (!fs.existsSync(path.join(PUBLIC_DIRECTORY, src))) {
-      throw new Error(`Missing image variant "${src}", run "npm run thumbnails"`);
-    }
-    return imageSource(src);
-  });
-
-  return [...downscaled, original];
-}
-
 function resolve(mediaPath: string, name: string, description: string): Photograph {
-  const original = imageSource(`/media${mediaPath}`);
+  const entry = manifestEntry(mediaPath);
+  const original = { src: mediaUrl(mediaPath), width: entry.width, height: entry.height };
+  const [placeholderWidth, placeholderHeight] = entry.placeholder;
 
   return {
     name,
     description,
     original,
-    placeholder: imageSource(`/media${variantPath(mediaPath, '300')}`),
-    variants: variants(mediaPath, original),
+    placeholder: { src: variantUrl(mediaPath, '300'), width: placeholderWidth, height: placeholderHeight },
+    variants: [
+      ...entry.variants.map(([width, height]) => ({ src: variantUrl(mediaPath, `${width}w`), width, height })),
+      original,
+    ],
   };
 }
 

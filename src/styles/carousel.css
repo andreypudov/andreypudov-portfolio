@@ -27,25 +27,25 @@
       }
 
       .left-top {
-        background-image: url("/media/images/corners/corner-left-top.svg");
+        background-image: url("https://media.andreypudov.com/full/images/corners/corner-left-top.svg");
         left: 20px;
         top: 20px;
       }
 
       .right-top {
-        background-image: url("/media/images/corners/corner-right-top.svg");
+        background-image: url("https://media.andreypudov.com/full/images/corners/corner-right-top.svg");
         right: 20px;
         top: 20px;
       }
 
       .left-bottom {
-        background-image: url("/media/images/corners/corner-left-bottom.svg");
+        background-image: url("https://media.andreypudov.com/full/images/corners/corner-left-bottom.svg");
         left: 20px;
         bottom: 20px;
       }
 
       .right-bottom {
-        background-image: url("/media/images/corners/corner-right-bottom.svg");
+        background-image: url("https://media.andreypudov.com/full/images/corners/corner-right-bottom.svg");
         right: 20px;
         bottom: 20px;
       }
@@ -60,25 +60,25 @@
         }
 
         .left-top {
-          background-image: url("/media/images/corners/corner-left-top-mob.svg");
+          background-image: url("https://media.andreypudov.com/full/images/corners/corner-left-top-mob.svg");
           left: 10px;
           top: 10px;
         }
 
         .right-top {
-          background-image: url("/media/images/corners/corner-right-top-mob.svg");
+          background-image: url("https://media.andreypudov.com/full/images/corners/corner-right-top-mob.svg");
           right: 10px;
           top: 10px;
         }
 
         .left-bottom {
-          background-image: url("/media/images/corners/corner-left-bottom-mob.svg");
+          background-image: url("https://media.andreypudov.com/full/images/corners/corner-left-bottom-mob.svg");
           left: 10px;
           bottom: 10px;
         }
 
         .right-bottom {
-          background-image: url("/media/images/corners/corner-right-bottom-mob.svg");
+          background-image: url("https://media.andreypudov.com/full/images/corners/corner-right-bottom-mob.svg");
           right: 10px;
           bottom: 10px;
         }
@@ -178,7 +178,7 @@
         display: block;
         width: 100%;
         height: 14px;
-        background-image: url("/media/images/ruler.svg");
+        background-image: url("https://media.andreypudov.com/full/images/ruler.svg");
         background-repeat: no-repeat;
         background-position-x: center;
         position: absolute;

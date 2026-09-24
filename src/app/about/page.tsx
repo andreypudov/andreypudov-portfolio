@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
+import { mediaUrl } from '@/lib/media';
 import { pageMetadata } from '@/lib/metadata';
 import { getSelfPortrait } from '@/lib/photographs';
 
@@ -26,7 +27,7 @@ export default function AboutPage() {
 
             <figure>
               <div className="logo">
-                <img src="/media/images/logos/derivco_sports_logo.jpg" alt="Derivco Sports Logo" />
+                <img src={mediaUrl('/images/logos/derivco_sports_logo.jpg')} alt="Derivco Sports Logo" />
               </div>
               <div className="text">
                 <figcaption>
@@ -50,7 +51,7 @@ export default function AboutPage() {
 
             <figure>
               <div className="logo">
-                <img src="/media/images/logos/epam_systems_logo.jpg" alt="EPAM Logo" />
+                <img src={mediaUrl('/images/logos/epam_systems_logo.jpg')} alt="EPAM Logo" />
               </div>
               <div className="text">
                 <figcaption>
@@ -70,7 +71,7 @@ export default function AboutPage() {
 
             <figure>
               <div className="logo">
-                <img src="/media/images/logos/intel_corporation_logo.jpg" alt="Intel Logo" />
+                <img src={mediaUrl('/images/logos/intel_corporation_logo.jpg')} alt="Intel Logo" />
               </div>
               <div className="text">
                 <figcaption>
@@ -94,7 +95,7 @@ export default function AboutPage() {
 
             <figure>
               <div className="logo">
-                <img src="/media/images/logos/intel_corporation_logo.jpg" alt="Intel Logo" />
+                <img src={mediaUrl('/images/logos/intel_corporation_logo.jpg')} alt="Intel Logo" />
               </div>
               <div className="text">
                 <figcaption>
@@ -122,7 +123,7 @@ export default function AboutPage() {
 
             <figure>
               <div className="logo">
-                <img src="/media/images/logos/intel_corporation_logo.jpg" alt="Intel Logo" />
+                <img src={mediaUrl('/images/logos/intel_corporation_logo.jpg')} alt="Intel Logo" />
               </div>
               <div className="text">
                 <figcaption>
@@ -148,7 +149,7 @@ export default function AboutPage() {
 
             <figure className="entry">
               <div className="logo">
-                <img src="/media/images/logos/madi_logo.jpg" alt="MADI Logo" />
+                <img src={mediaUrl('/images/logos/madi_logo.jpg')} alt="MADI Logo" />
               </div>
               <div className="text">
                 <figcaption>
@@ -164,7 +165,7 @@ export default function AboutPage() {
 
             <figure className="entry">
               <div className="logo">
-                <img src="/media/images/logos/eas_logo.jpg" alt="European Aviation School Logo" />
+                <img src={mediaUrl('/images/logos/eas_logo.jpg')} alt="European Aviation School Logo" />
               </div>
               <div className="text">
                 <figcaption>

@@ -4,6 +4,8 @@ Source of the photography portfolio hosted at [[https://andreypudov.com][andreyp
 Next.js application exported as a fully static website and served by GitHub
 Pages. Next.js and React are used only at build time: the published pages are
 plain HTML and CSS, with a few small scripts where a page needs them.
+Photographs and other media are not part of this repository: they live in a
+separate media bucket (see [[*Media][Media]]).
 
 ** Project structure
 
@@ -13,35 +15,35 @@ plain HTML and CSS, with a few small scripts where a page needs them.
 | =src/app/sitemap.ts= | Generates =sitemap.xml= at build time, dated with the build              |
 | =src/components/layout/= | Shared layout: header, footer, analytics                             |
 | =src/components/ui/=  | Abstract UI blocks: carousel, feature/masonry/image grids, lightbox     |
-| =src/lib/=            | Build-time helpers: album metadata lookup, WebP dimension reader        |
+| =src/lib/=            | Build-time helpers: album metadata, media URLs and manifest, page metadata |
 | =src/styles/=         | Hand-written CSS, one file per abstract component, combined in =site.css= |
 | =data/photographs/=   | Album metadata (JSON): name, description, path, orientation, date       |
 | =data/schemas/=       | JSON schemas describing the album format                                |
-| =public/media/=       | Full-resolution photographs, =thumbnails/= (downscaled variants), other images |
+| =data/media-manifest.json= | Dimensions of every media file, copied from the media bucket        |
 | =public/=             | Files copied as is: =CNAME=, =robots.txt=, =.well-known/=                 |
 | =public/scripts/=     | Plain browser scripts: analytics, world clock (=/time=), network info (=/ip=) |
-| =scripts/=            | Build tooling: =build-thumbnails.sh= (with its sRGB profile), =strip-runtime.mjs= |
+| =scripts/=            | Build tooling: =strip-runtime.mjs=                                       |
 | =services/=           | Standalone Go services backing the =/ip= and =/time= pages              |
 | =.github/workflows/=  | GitHub Actions workflow that builds and deploys the site                |
 
 Pages select photographs by file name (e.g. =2025-12-06_015.webp=), see the
 =CAROUSEL= and =FEATURE_GRID= lists in =src/app/page.tsx= and =SECTIONS= in
 =src/app/portfolio/page.tsx=. At build time =src/lib/photographs.ts= resolves
-each name against =data/photographs/*.json= for its caption and reads image
-dimensions directly from the WebP files. Grids and other small images are
-served through =srcset=, so browsers download a downscaled variant instead of
-the original (see [[*Thumbnails][Thumbnails]]).
+each name against =data/photographs/*.json= for its caption and looks up the
+dimensions of the image and its variants in =data/media-manifest.json=.
+Grids and other small images are served through =srcset=, so browsers
+download a downscaled variant instead of the original (see [[*Thumbnails][Thumbnails]]).
 
 ** Development
 
-Requirements: Node.js 22 or newer, npm and ImageMagick (only to build
-thumbnails).
+Requirements: Node.js 22 or newer and npm; ImageMagick and the media
+directory (=../r2=) only to add media.
 
 #+begin_src shell
 npm install          # install dependencies
 npm run dev          # development server on http://localhost:3000
 npm run typecheck    # TypeScript check without emitting files
-npm run thumbnails   # build missing image variants (see Thumbnails)
+npm run media        # build variants of new media, update the manifest
 npm run build        # static export into out/, without the JS runtime
 #+end_src
 
@@ -54,17 +56,27 @@ npm run build
 npx serve out        # or: python3 -m http.server -d out 3000
 #+end_src
 
+Pages load media from =https://media.andreypudov.com=. To work on the site
+with a local copy of the media directory, serve it and point =MEDIA_URL= at
+it (stylesheet backgrounds still come from the production domain):
+
+#+begin_src shell
+npx serve ../r2 -l 8080 &
+MEDIA_URL=http://localhost:8080 npm run dev
+#+end_src
+
 *** Adding photographs
 
-1. Put the full-resolution image into =public/media/photographs/<album>/=.
+1. Put the full-resolution image into =../r2/full/photographs/<album>/=.
 2. Describe the image in the matching =data/photographs/<album>.json=.
 3. Reference the file name in the page's list (homepage or portfolio).
-4. Run =npm run thumbnails= and commit the generated files together with
-   the photograph.
+4. Run =npm run media= and commit the updated =data/media-manifest.json=.
+5. Upload the media directory to the bucket (see [[file:DEPLOYMENT.org][DEPLOYMENT.org]]) before
+   pushing the change.
 
 The build fails with an explicit error when a referenced photograph has no
-metadata, or when its file or one of its variants is missing, so
-=npm run build= doubles as a check.
+metadata or is missing from the manifest, so =npm run build= doubles as a
+check.
 
 ** Static output without JavaScript
 
@@ -97,22 +109,51 @@ renders the markup the script fills in (see =WorldClock.tsx= and
 =world-clock.js=). Elements the script changes are marked with
 =suppressHydrationWarning=, because =npm run dev= still hydrates the pages.
 
+** Media
+
+Photographs, drawings and site images are kept outside the repository in a
+media directory, by default =../r2= next to this project (override with
+=R2_DIRECTORY=). Its whole content is published in a Cloudflare R2 bucket
+served from =https://media.andreypudov.com=, so the bucket has the same
+layout:
+
+| Path                        | Content                                                            |
+|-----------------------------+--------------------------------------------------------------------|
+| =full/=                     | Originals only: =photographs/=, =drawings/=, =images/=             |
+| =thumbnails/=               | Downscaled variants, mirroring the structure of =full/=            |
+| =scripts/build-thumbnails.sh= | Builds the variants and the manifest (see [[*Thumbnails][Thumbnails]])       |
+| =scripts/profiles/sRGB.icc= | Colour profile the variants are converted into                     |
+| =manifest.tsv=              | Index of processed images, used to skip them on the next run       |
+| =manifest.json=             | Dimensions of every original and its variants                     |
+
+=npm run media= runs the script and copies =manifest.json= into
+=data/media-manifest.json=, which is committed. The build reads only that
+manifest, so neither CI nor a fresh checkout needs the media directory or
+ImageMagick. =src/lib/media.ts= builds the URLs: =MEDIA_URL= followed by
+=/full/<path>= for originals and =/thumbnails/<path>_<suffix>.webp= for
+variants. Stylesheets cannot read =MEDIA_URL=, so their background images use
+the absolute production URL.
+
 ** Thumbnails
 
-=scripts/build-thumbnails.sh= is a POSIX shell script built on ImageMagick
-(version 7 =magick=, or version 6 =convert= and =identify=). It replaces the
-thumbnail step of the previous Python engine.
+=../r2/scripts/build-thumbnails.sh= is a POSIX shell script built on
+ImageMagick (version 7 =magick=, or version 6 =convert= and =identify=). It
+replaces the thumbnail step of the previous Python engine.
 
 #+begin_src shell
-npm run thumbnails                    # every image referenced from src/
-npm run thumbnails -- 2025-12-06_015.webp /images/covers/bank_of_russia.webp
-npm run thumbnails -- -f              # regenerate existing variants too
+npm run media                                   # build variants of new images
+sh ../r2/scripts/build-thumbnails.sh photographs/2023-11-18/2023-11-18_020.webp
+sh ../r2/scripts/build-thumbnails.sh -f         # regenerate every variant
+sh ../r2/scripts/build-thumbnails.sh -j 4       # limit parallel conversions
 #+end_src
 
-Without arguments the script collects every =.webp= name mentioned in
-=src/=, so only images that are actually rendered get variants. Existing
-files are skipped, which makes repeated runs cheap. The variants are
-committed, so neither the CI build nor other contributors need ImageMagick.
+The script considers every =.webp= in =full/=; working files in other
+formats (e.g. =drawings/*/raw/=), logos and icons are left alone. An image is
+converted only when it is missing from =manifest.tsv= or one of its variants
+does not exist, so a run after adding photographs only processes those.
+Images removed from =full/= drop out of the manifest. Conversions run in
+parallel (one per CPU by default), and a failing image is reported and left
+out of the manifest without stopping the others.
 
 *** Variants
 
@@ -124,10 +165,9 @@ committed, so neither the CI build nor other contributors need ImageMagick.
 | =<name>_1200w.webp=  | 1200px wide                 | =srcset= candidate                           |
 | original             | 2048px long edge            | last =srcset= candidate, carousel, lightbox  |
 
-Photographs keep their variants in =public/media/thumbnails/=, mirroring
-=public/media/photographs/=. Other images (e.g. =images/covers/=) keep them
-next to the original. Variants that would be as wide as the original or wider
-are not created.
+Variants live in =thumbnails/= at the same relative path as their original
+in =full/= (e.g. =full/images/covers/x.webp= → =thumbnails/images/covers/x_800w.webp=).
+Variants that would be as wide as the original or wider are not created.
 
 The widths follow the layouts: grid tiles are rendered 200–380 CSS pixels
 wide on desktops and up to the full screen width on phones, so 400px covers
@@ -136,8 +176,8 @@ single column at 3× density. Each component states its rendered width in a
 =sizes= attribute (derived from its stylesheet) and the browser picks the
 smallest sufficient candidate. The carousel fills the viewport height, which
 =sizes= cannot express, and the lightbox shows photographs at full size, so
-both keep the original. The widths are defined in the script (=WIDTHS=) and
-in =src/lib/photographs.ts= (=VARIANT_WIDTHS=) and must be kept in sync.
+both keep the original. The widths are defined in the script (=WIDTHS=)
+only: the website takes the available variants from the manifest.
 
 *** Conversion settings
 
@@ -181,23 +221,7 @@ An 800px variant is about a fifth of its original (~550 KB). Sharpening
 after resizing (=-unsharp=) was evaluated and left out: it grew files by
 about 25% and moved them further from the source.
 
-** Deployment to GitHub Pages
+** Deployment
 
-Deployment is automated by =.github/workflows/deploy.yml=. Every push to
-=master= (or a manual run via /Actions → Deploy to GitHub Pages → Run
-workflow/) does the following:
-
-1. installs dependencies with =npm ci=,
-2. runs =npm run build= to produce the static site in =out/=,
-3. uploads =out/= as a Pages artifact and publishes it with
-   =actions/deploy-pages=.
-
-One-time repository setup: /Settings → Pages → Source: GitHub Actions/. The
-custom domain is taken from =public/CNAME=.
-
-The build output is never committed. =master= contains only sources and
-media; =out/= and =.next/= are ignored by git. Committing the output to
-=master= (as the previous Python engine did) would mix generated files with
-sources and produce noisy diffs, and pushing it to a =gh-pages= branch would
-store every photograph a second time, growing the repository with each
-deployment. A Pages artifact keeps the output outside git entirely.
+Uploading media to the Cloudflare R2 bucket (with rclone) and publishing the
+website to GitHub Pages are described in [[file:DEPLOYMENT.org][DEPLOYMENT.org]].

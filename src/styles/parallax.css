@@ -36,7 +36,7 @@
 
   &.timelapse {
     .background {
-      background-image: url('/media/images/sections/timelapse.webp');
+      background-image: url('https://media.andreypudov.com/full/images/sections/timelapse.webp');
     }
   }
 
@@ -44,7 +44,7 @@
     height: auto;
 
     .background {
-      background-image: url('/media/images/sections/about.webp');
+      background-image: url('https://media.andreypudov.com/full/images/sections/about.webp');
     }
 
     .content {

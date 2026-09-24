@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "postbuild": "node scripts/strip-runtime.mjs",
-    "thumbnails": "sh scripts/build-thumbnails.sh",
+    "media": "sh \"${R2_DIRECTORY:-../r2}/scripts/build-thumbnails.sh\" && cp \"${R2_DIRECTORY:-../r2}/manifest.json\" data/media-manifest.json",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

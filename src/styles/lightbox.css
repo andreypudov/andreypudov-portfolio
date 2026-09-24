@@ -127,27 +127,27 @@
           }
 
           &.bank-of-russia {
-            background-image: url('/media/images/covers/bank_of_russia.webp');
+            background-image: url('https://media.andreypudov.com/full/images/covers/bank_of_russia.webp');
           }
 
           &.bolshaya-pokrovskaya-street {
-            background-image: url('/media/images/covers/bolshaya_pokrovskaya_street.webp');
+            background-image: url('https://media.andreypudov.com/full/images/covers/bolshaya_pokrovskaya_street.webp');
           }
 
           &.kanavinsky-bridge {
-            background-image: url('/media/images/covers/kanavinsky_bridge.webp');
+            background-image: url('https://media.andreypudov.com/full/images/covers/kanavinsky_bridge.webp');
           }
 
           &.maxim-gorky-square {
-            background-image: url('/media/images/covers/maxim_gorky_square.webp');
+            background-image: url('https://media.andreypudov.com/full/images/covers/maxim_gorky_square.webp');
           }
 
           &.switzerland-park {
-            background-image: url('/media/images/covers/switzerland_park.webp');
+            background-image: url('https://media.andreypudov.com/full/images/covers/switzerland_park.webp');
           }
 
           &.zelenskiy-syezd-street {
-            background-image: url('/media/images/covers/zelenskiy_syezd_street.webp');
+            background-image: url('https://media.andreypudov.com/full/images/covers/zelenskiy_syezd_street.webp');
           }
         }
 
