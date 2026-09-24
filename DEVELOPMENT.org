@@ -1,0 +1,76 @@
+* Development
+
+Source of the photography portfolio hosted at [[https://andreypudov.com][andreypudov.com]]. The site is a
+Next.js application exported as a fully static website (pure HTML and CSS,
+no client-side framework rendering) and served by GitHub Pages.
+
+** Project structure
+
+| Path                  | Purpose                                                                 |
+|-----------------------+-------------------------------------------------------------------------|
+| =src/app/=            | Pages (App Router): home, =portfolio/=, =about/=, =contact/=, =ip/=, =time/= |
+| =src/components/layout/= | Shared layout: header, footer, loader, analytics                     |
+| =src/components/ui/=  | Abstract UI blocks: carousel, feature/masonry/image grids, lightbox     |
+| =src/lib/=            | Build-time helpers: album metadata lookup, WebP dimension reader        |
+| =src/styles/=         | Hand-written CSS, one file per abstract component, combined in =site.css= |
+| =data/photographs/=   | Album metadata (JSON): name, description, path, orientation, date       |
+| =data/schemas/=       | JSON schemas describing the album format                                |
+| =public/media/=       | Full-resolution photographs, =thumbnails/= (=*_300.webp=), other images   |
+| =public/=             | Files copied as is: =CNAME=, =robots.txt=, =sitemap.xml=, =.well-known/=  |
+| =services/=           | Standalone Go services backing the =/ip= and =/time= pages              |
+| =.github/workflows/=  | GitHub Actions workflow that builds and deploys the site                |
+
+Pages select photographs by file name (e.g. =2025-12-06_015.webp=), see the
+=CAROUSEL= and =FEATURE_GRID= lists in =src/app/page.tsx= and =SECTIONS= in
+=src/app/portfolio/page.tsx=. At build time =src/lib/photographs.ts= resolves
+each name against =data/photographs/*.json= for its caption and reads image
+dimensions directly from the WebP files.
+
+** Development
+
+Requirements: Node.js 22 or newer and npm.
+
+#+begin_src shell
+npm install          # install dependencies
+npm run dev          # development server on http://localhost:3000
+npm run typecheck    # TypeScript check without emitting files
+npm run build        # static export into out/
+#+end_src
+
+The project uses =output: 'export'=, so =next start= is not available. To
+preview the production build, serve the =out/= directory with any static
+server:
+
+#+begin_src shell
+npm run build
+npx serve out        # or: python3 -m http.server -d out 3000
+#+end_src
+
+*** Adding photographs
+
+1. Put the full-resolution image into =public/media/photographs/<album>/= and
+   its 300px thumbnail into =public/media/thumbnails/<album>/= with the
+   =_300.webp= suffix.
+2. Describe the image in the matching =data/photographs/<album>.json=.
+3. Reference the file name in the page's list (homepage or portfolio).
+
+The build fails with an explicit error when a referenced photograph has no
+metadata or its file is missing, so =npm run build= doubles as a check.
+
+** Deployment to GitHub Pages
+
+Deployment is automated by =.github/workflows/deploy.yml=. Every push to
+=master= (or a manual run via /Actions → Deploy to GitHub Pages → Run
+workflow/) does the following:
+
+1. installs dependencies with =npm ci=,
+2. runs =npm run build= to produce the static site in =out/=,
+3. uploads =out/= as a Pages artifact and publishes it with
+   =actions/deploy-pages=.
+
+One-time repository setup: /Settings → Pages → Source: GitHub Actions/. The
+custom domain is taken from =public/CNAME=.
+
+The build output is never committed. =master= contains only sources and
+media; =out/= and =.next/= are ignored by git. See =DEPLOYMENT.md= for the
+reasoning behind this strategy.

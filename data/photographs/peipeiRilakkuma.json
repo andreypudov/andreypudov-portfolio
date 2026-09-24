@@ -1,0 +1,58 @@
+{
+  "$schema": "../schemas/album.schema.json",
+  "name": "Pei Pei with Rilakkuma",
+  "description": "",
+  "genre": "Portrait",
+  "cover": "/photographs/2026-05-24/2026-05-24_001.webp",
+  "items": [
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-05-24/2026-05-24_001.webp",
+      "orientation": "landscape",
+      "date": "2026-05-24"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-05-24/2026-05-24_002.webp",
+      "orientation": "portrait",
+      "date": "2026-05-24"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-05-24/2026-05-24_003.webp",
+      "orientation": "landscape",
+      "date": "2026-05-24"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-05-24/2026-05-24_004.webp",
+      "orientation": "landscape",
+      "date": "2026-05-24"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-05-24/2026-05-24_005.webp",
+      "orientation": "portrait",
+      "date": "2026-05-24"
+    },
+    {
+      "name": "A Hug For A Gentle Giant",
+      "description": "Pei Pei and Rilakkuma share a playful moment, where warmth, imagination, and companionship brighten a sunlit afternoon.",
+      "path": "/photographs/2026-05-24/2026-05-24_006.webp",
+      "orientation": "portrait",
+      "date": "2026-05-24"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-05-24/2026-05-24_007.webp",
+      "orientation": "landscape",
+      "date": "2026-05-24"
+    }
+  ]
+}
