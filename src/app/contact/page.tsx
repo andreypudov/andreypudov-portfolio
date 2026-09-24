@@ -3,11 +3,15 @@ import type { Metadata } from 'next';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import LazyImage from '@/components/ui/LazyImage';
+import { pageMetadata } from '@/lib/metadata';
 import { getSelfPortrait } from '@/lib/photographs';
 
-export const metadata: Metadata = {
-  title: 'Contact - Andrey Pudov',
-};
+export const metadata: Metadata = pageMetadata({
+  title: 'Contact',
+  description: 'Contact photographer Andrey Pudov about a project or collaboration, including encrypted email via PGP.',
+  path: '/contact/',
+  image: getSelfPortrait(),
+});
 
 const PGP_PUBLIC_KEY = `-----BEGIN PGP PUBLIC KEY BLOCK-----
 

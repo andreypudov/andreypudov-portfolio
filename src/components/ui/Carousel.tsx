@@ -28,7 +28,7 @@ export default function Carousel({ photographs }: { photographs: Photograph[] })
 
       <div className="inner" role="group" aria-label="Featured photographs">
         {photographs.map((photograph, index) => (
-          <Fragment key={photograph.src}>
+          <Fragment key={photograph.original.src}>
             <input
               className="open"
               type="radio"

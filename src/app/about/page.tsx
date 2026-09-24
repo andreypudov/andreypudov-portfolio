@@ -2,10 +2,15 @@ import type { Metadata } from 'next';
 
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
+import { pageMetadata } from '@/lib/metadata';
+import { getSelfPortrait } from '@/lib/photographs';
 
-export const metadata: Metadata = {
-  title: 'About - Andrey Pudov',
-};
+export const metadata: Metadata = pageMetadata({
+  title: 'About',
+  description: 'Experience, education and recommendations of Andrey Pudov, senior software engineer and photographer.',
+  path: '/about/',
+  image: getSelfPortrait(),
+});
 
 export default function AboutPage() {
   return (

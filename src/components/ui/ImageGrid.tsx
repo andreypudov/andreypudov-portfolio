@@ -20,7 +20,7 @@ export default function ImageGrid({ images, tilePrefix, entryPrefix }: ImageGrid
   return (
     <div className="image-grid container">
       {images.map((image, index) => (
-        <a id={`${tilePrefix}-${index + 1}`} href={`#${entryPrefix}-${index + 1}`} key={image.src}>
+        <a id={`${tilePrefix}-${index + 1}`} href={`#${entryPrefix}-${index + 1}`} key={image.original.src}>
           <LazyImage image={image} sizes={SIZES} />
         </a>
       ))}

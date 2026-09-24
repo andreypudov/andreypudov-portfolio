@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import Carousel from '@/components/ui/Carousel';
@@ -7,7 +9,8 @@ import LazyImage from '@/components/ui/LazyImage';
 import Lightbox from '@/components/ui/Lightbox';
 import Parallax from '@/components/ui/Parallax';
 import VideoLightbox, { type Video } from '@/components/ui/VideoLightbox';
-import { getImage, getPhotographs, getSelfPortrait } from '@/lib/photographs';
+import { pageMetadata } from '@/lib/metadata';
+import { getImage, getPhotograph, getPhotographs, getSelfPortrait } from '@/lib/photographs';
 
 const CAROUSEL = [
   '2026-01-22_03-08_001.webp',
@@ -62,6 +65,14 @@ const FEATURE_GRID = [
   '2015-07-27_08-08_058_large.webp',
   '2012-11-09_21_037_large.webp',
 ];
+
+export const metadata: Metadata = pageMetadata({
+  title: 'Home',
+  description:
+    'Official website of Russian Landscape Photographer Andrey Pudov. Welcome to the portfolio of stunning landscape photography.',
+  path: '/',
+  image: getPhotograph(CAROUSEL[0]),
+});
 
 const TIMELAPSE_COVERS = [
   { path: '/images/covers/bank_of_russia.webp', name: 'Bank of Russia' },

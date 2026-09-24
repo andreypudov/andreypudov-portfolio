@@ -59,11 +59,11 @@ export default function Footer({ priority = false }: FooterProps) {
     <footer>
       <div className="social container">
         <div className="title">
-          <a href="https://www.instagram.com/andrey.pudov/" target="_blank">Where every frame tells a story</a>
+          <a href="https://www.instagram.com/andrey.pudov/" target="_blank" rel="noopener noreferrer">Where every frame tells a story</a>
         </div>
         <div className="images">
           {SOCIAL_IMAGES.map((social, index) => (
-            <a href={social.href} target="_blank" aria-label={social.caption} key={social.href}>
+            <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.caption} key={social.href}>
               <LazyImage image={getImage(social.path, social.caption)} priority={priority && index === 0} sizes={SIZES} />
             </a>
           ))}
@@ -71,20 +71,20 @@ export default function Footer({ priority = false }: FooterProps) {
       </div>
 
       <div className="links">
-        <a href="https://www.instagram.com/andrey.pudov/" target="_blank" aria-label="Andrey Pudov's Instagram">
+        <a href="https://www.instagram.com/andrey.pudov/" target="_blank" rel="noopener noreferrer" aria-label="Andrey Pudov's Instagram">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d={INSTAGRAM_PATH} />
             <path d={INSTAGRAM_PATH} />
           </svg>
         </a>
 
-        <a href="https://vk.com/andreypudov" target="_blank" aria-label="Andrey Pudov's VK profile">
+        <a href="https://vk.com/andreypudov" target="_blank" rel="noopener noreferrer" aria-label="Andrey Pudov's VK profile">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d={VK_PATH} />
           </svg>
         </a>
 
-        <a href="https://www.linkedin.com/in/pudov/" target="_blank" aria-label="Andrey Pudov's LinkedIn profile">
+        <a href="https://www.linkedin.com/in/pudov/" target="_blank" rel="noopener noreferrer" aria-label="Andrey Pudov's LinkedIn profile">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d={LINKEDIN_PATH} />
           </svg>

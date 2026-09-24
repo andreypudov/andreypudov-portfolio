@@ -5,11 +5,8 @@ import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import Lightbox from '@/components/ui/Lightbox';
 import MasonryGrid from '@/components/ui/MasonryGrid';
-import { getPhotographs } from '@/lib/photographs';
-
-export const metadata: Metadata = {
-  title: 'Portfolio - Andrey Pudov',
-};
+import { pageMetadata } from '@/lib/metadata';
+import { getPhotograph, getPhotographs } from '@/lib/photographs';
 
 const SECTIONS = [
   {
@@ -131,6 +128,13 @@ const SECTIONS = [
     ],
   },
 ];
+
+export const metadata: Metadata = pageMetadata({
+  title: 'Portfolio',
+  description: 'Selected travel, nature, portrait and event photography by Andrey Pudov.',
+  path: '/portfolio/',
+  image: getPhotograph(SECTIONS[0].photographs[0]),
+});
 
 export default function PortfolioPage() {
   const sections = SECTIONS.map((section) => ({

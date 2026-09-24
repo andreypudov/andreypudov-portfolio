@@ -26,10 +26,10 @@ export default function Lightbox({ photographs, entryPrefix, tilePrefix, variant
           tilePrefix={tilePrefix}
           title={photograph.name}
           description={photograph.description}
-          key={photograph.src}
+          key={photograph.original.src}
         >
           <div className="image-wrapper">
-            <img src={photograph.src} alt={photograph.description} loading="lazy" />
+            <img src={photograph.original.src} alt={photograph.description} loading="lazy" />
           </div>
         </LightboxEntry>
       ))}

@@ -22,21 +22,23 @@ interface Album {
   items: AlbumItem[];
 }
 
-/**
- * A fully resolved image, ready to be rendered:
- * the full-resolution file, its lazy-loading thumbnail and both dimensions.
- */
-export interface Photograph {
-  name: string;
-  description: string;
+/** A single image file and its pixel dimensions. */
+export interface ImageSource {
   src: string;
   width: number;
   height: number;
-  thumbnailSrc: string;
-  thumbnailWidth: number;
-  thumbnailHeight: number;
-  /** Width-descriptor candidates: downscaled variants plus the original. */
-  srcSet: string;
+}
+
+/** A fully resolved image and all of its files, ready to be rendered. */
+export interface Photograph {
+  name: string;
+  description: string;
+  /** The full-resolution file. */
+  original: ImageSource;
+  /** Fits into 300x300, shown while a larger file loads (see LazyImage). */
+  placeholder: ImageSource;
+  /** The srcset candidates: downscaled variants narrower than the original, then the original. */
+  variants: ImageSource[];
 }
 
 /**
@@ -79,6 +81,10 @@ function dimensions(mediaSrc: string): ImageDimensions {
   return cached;
 }
 
+function imageSource(src: string): ImageSource {
+  return { src, ...dimensions(src) };
+}
+
 /**
  * Derives the location of a downscaled variant of a media path. Photographs
  * have them mirrored under /media/thumbnails, other images keep them alongside.
@@ -92,38 +98,30 @@ function variantPath(mediaPath: string, suffix: string): string {
 }
 
 /**
- * Lists the srcset candidates of an image: every variant narrower than the
- * original, then the original itself. Fails the build when a variant has
- * not been generated yet.
+ * Lists every variant narrower than the original, then the original itself.
+ * Fails the build when a variant has not been generated yet.
  */
-function sourceSet(mediaPath: string, width: number): string {
-  const candidates = VARIANT_WIDTHS.filter((variantWidth) => variantWidth < width).map((variantWidth) => {
+function variants(mediaPath: string, original: ImageSource): ImageSource[] {
+  const downscaled = VARIANT_WIDTHS.filter((variantWidth) => variantWidth < original.width).map((variantWidth) => {
     const src = `/media${variantPath(mediaPath, `${variantWidth}w`)}`;
     if (!fs.existsSync(path.join(PUBLIC_DIRECTORY, src))) {
       throw new Error(`Missing image variant "${src}", run "npm run thumbnails"`);
     }
-    return `${src} ${variantWidth}w`;
+    return imageSource(src);
   });
 
-  return [...candidates, `/media${mediaPath} ${width}w`].join(', ');
+  return [...downscaled, original];
 }
 
 function resolve(mediaPath: string, name: string, description: string): Photograph {
-  const src = `/media${mediaPath}`;
-  const { width, height } = dimensions(src);
-  const thumbnailSrc = `/media${variantPath(mediaPath, '300')}`;
-  const thumbnail = dimensions(thumbnailSrc);
+  const original = imageSource(`/media${mediaPath}`);
 
   return {
     name,
     description,
-    src,
-    width,
-    height,
-    thumbnailSrc,
-    thumbnailWidth: thumbnail.width,
-    thumbnailHeight: thumbnail.height,
-    srcSet: sourceSet(mediaPath, width),
+    original,
+    placeholder: imageSource(`/media${variantPath(mediaPath, '300')}`),
+    variants: variants(mediaPath, original),
   };
 }
 

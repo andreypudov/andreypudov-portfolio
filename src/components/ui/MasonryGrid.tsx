@@ -17,7 +17,7 @@ export default function MasonryGrid({ photographs, section, priority = false }: 
   return (
     <div className="masonry-grid">
       {photographs.map((photograph, index) => (
-        <figure key={photograph.src}>
+        <figure key={photograph.original.src}>
           <a id={`${section}-grid-${index + 1}`} href={`#lightbox-${section}-${index + 1}`}>
             <LazyImage image={photograph} priority={priority && index === 0} sizes={SIZES} />
           </a>
