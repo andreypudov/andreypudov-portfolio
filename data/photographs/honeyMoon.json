@@ -1,0 +1,499 @@
+{
+  "$schema": "../schemas/album.schema.json",
+  "name": "Honeymoon at the Edge of the World: The Azores.",
+  "description": "",
+  "genre": "Nature",
+  "cover": "/photographs/2026-06-05_19/2026-06-05_19_024.webp",
+  "items": [
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_001.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_002.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_003.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_004.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_005.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_006.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "Misty Forest under Blooming Branches",
+      "description": "A dense forest scene shows tall trees emerging through mist with vibrant red flowers on overhanging branches.",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_007.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_008.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_009.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_010.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_011.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_012.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_013.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_014.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_015.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_016.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_017.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_018.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_019.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_020.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_021.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_022.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_023.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_024.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_025.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_026.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "Pathway to the Lakeside",
+      "description": "A descending dirt stairway leads through lush greenery toward a lake surrounded by hills under a partly cloudy sky.",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_027.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_028.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_029.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_030.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_031.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_032.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_033.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_034.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_035.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_036.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_037.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_038.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_039.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_040.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_041.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_042.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "Purple Foxglove Among Greenery",
+      "description": "A single tall purple foxglove flower rises amid green plants and shrubbery beneath a partly cloudy sky.",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_043.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_044.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_045.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_046.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_047.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_048.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_045.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_046.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_047.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_048.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_049.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_050.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_051.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_052.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_053.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_054.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "Tea Harvest in Misty Hills",
+      "description": "Workers gather and carry harvested tea leaves across lush green plantations under overcast skies.",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_055.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_056.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_057.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_058.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_059.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_060.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_061.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_062.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_063.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_064.webp",
+      "orientation": "portrait",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_065.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    },
+    {
+      "name": "",
+      "description": "",
+      "path": "/photographs/2026-06-05_19/2026-06-05_19_066.webp",
+      "orientation": "landscape",
+      "date": "2026-06-19"
+    }
+  ]
+}
