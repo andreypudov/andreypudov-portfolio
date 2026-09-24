@@ -8,34 +8,34 @@ interface FooterProps {
 
 const SOCIAL_IMAGES = [
   {
+    href: 'https://www.instagram.com/andrey.pudov/p/CX8FoBhsPaf/',
+    path: '/photographs/2015-07-27_08-08/2015-07-27_08-08_035_large.webp',
+    caption: 'The mouth of the Bolshoy Chivyrkuy river - the first morning on the shore of the lake.',
+  },
+  {
+    href: 'https://www.instagram.com/andrey.pudov/p/CbedziisNlQ/',
+    path: '/photographs/2016-10-15_11-05/2016-10-15_11-05_024_large.webp',
+    caption: 'Multnomah Falls is a waterfall located on Multnomah Creek in the Columbia River Gorge. Spanning two tiers on basalt cliffs, it is the tallest waterfall in the state of Oregon at 189 m in height. Multnomah Falls is the most visited natural recreation site in the Pacific Northwest with more than two million stopping by each year to take in the views. This is also one of the best places in the Columbia River Gorge National Scenic Area to study geology exposed by floods.',
+  },
+  {
+    href: 'https://www.instagram.com/andrey.pudov/p/Cg5B6plMIVE/',
+    path: '/photographs/2017-09-09_24/2017-09-09_24_030_large.webp',
+    caption: 'The area known as Dumbo used to be known as Gairville. The area was originally a ferry landing, characterized by 19th- and early 20th-century industrial and warehouse buildings, Belgian block streets, and its location on the East River by the imposing anchorage of the Manhattan Bridge. The entirety of Dumbo was bought by developer David Walentas and his company Two Trees Management in the late 20th century, and remade into an upscale residential and commercial community—first becoming a haven for art galleries, and currently a center for technology startups.',
+  },
+  {
     href: 'https://www.instagram.com/andrey.pudov/p/CjGAQ0gMxUk/',
     path: '/photographs/2017-12-18_2018-01-05/2017-12-18_2018-01-05_001_large.webp',
-    caption: 'A masterful spiral of stone and light in Vatican City, where Renaissance design meets perfect symmetry.',
+    caption: 'The modern double helix staircase, also in the Pio-Clementine Museum, and commonly referred to as the "Bramante Staircase", was designed by Giuseppe Momo, sculpted by Antonio Maraini and realized by the Ferdinando Marinelli Artistic Foundry in 1932 and was inspired by the original Bramante Staircase. This staircase, like the original, is a double helix, having two staircases allowing people to ascend without meeting people descending; as with the original, the main purpose of this design is to allow uninterrupted traffic in each direction. It encircles the outer wall of a stairwell approximately fifteen meters wide and with a clear space at the centre. The balustrade around the ramp is of ornately worked metal. A canopy located above provides the necessary light to illuminate the stairs. The staircase is located at the end of the museum visit and all visitors leave by this route.',
   },
   {
-    href: 'https://www.instagram.com/andrey.pudov/p/Cjw6stCs_s9/',
-    path: '/photographs/2019-10-26/2019-10-26_004.webp',
-    caption: 'A quiet detail of nature: delicate spruce needles glisten in soft light, capturing the forest’s serene essence.',
+    href: 'https://www.instagram.com/andrey.pudov/p/C4Klgh7oO0h/',
+    path: '/photographs/2022-08-27_09-10/2022-08-27_09-10_001.webp',
+    caption: 'Rådhuset Station',
   },
   {
-    href: 'https://www.instagram.com/andrey.pudov/p/C1bKfriog_6/',
-    path: '/photographs/2022-08-15/2022-08-15_006.webp',
-    caption: 'A lone hiker ascends Puigmal’s rugged slopes, dwarfed by a vast sea of clouds that blankets the landscape below.',
-  },
-  {
-    href: 'https://www.instagram.com/andrey.pudov/p/C2MjPU6IGCp/',
-    path: '/photographs/2022-08-27_09-10/2022-08-27_09-10_030.webp',
-    caption: 'Urban life meets nature as a kayaker glides through the waterways at the heart of Stockholm.',
-  },
-  {
-    href: 'https://www.instagram.com/andrey.pudov/p/C8JiwcEoZZ1/',
-    path: '/photographs/2022-08-27_09-10/2022-08-27_09-10_055.webp',
-    caption: 'A minimalist study of form and texture, capturing the sharp angles and sweeping lines of Oslo’s iconic opera house roof.',
-  },
-  {
-    href: 'https://www.instagram.com/andrey.pudov/p/C9jntSqoCZO/',
-    path: '/photographs/2023-11-18/2023-11-18_020.webp',
-    caption: 'A powerful cascade plunges through steep canyon walls, showcasing the untamed beauty of the Pyrenees.',
+    href: 'https://www.instagram.com/andrey.pudov/p/C9rWn08IKDc/',
+    path: '/photographs/2023-11-18/2023-11-18_002.webp',
+    caption: 'Ordesa and Monte Perdido National Park',
   },
 ];
 
