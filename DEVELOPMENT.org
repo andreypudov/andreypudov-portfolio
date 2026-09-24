@@ -10,7 +10,7 @@ plain HTML and CSS, with a few small scripts where a page needs them.
 | Path                  | Purpose                                                                 |
 |-----------------------+-------------------------------------------------------------------------|
 | =src/app/=            | Pages (App Router): home, =portfolio/=, =about/=, =contact/=, =ip/=, =time/= |
-| =src/components/layout/= | Shared layout: header, footer, loader, analytics                     |
+| =src/components/layout/= | Shared layout: header, footer, analytics                             |
 | =src/components/ui/=  | Abstract UI blocks: carousel, feature/masonry/image grids, lightbox     |
 | =src/lib/=            | Build-time helpers: album metadata lookup, WebP dimension reader        |
 | =src/styles/=         | Hand-written CSS, one file per abstract component, combined in =site.css= |

@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
 import Analytics from '@/components/layout/Analytics';
-import Loader from '@/components/layout/Loader';
 
 import '@/styles/site.css';
 
@@ -21,7 +20,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <Analytics />
 
-        <Loader />
         {children}
       </body>
     </html>
