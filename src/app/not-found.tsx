@@ -20,7 +20,7 @@ export default function NotFoundPage() {
         </div>
       </main>
 
-      <Footer priority />
+      <Footer />
     </>
   );
 }
