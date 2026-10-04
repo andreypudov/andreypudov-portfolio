@@ -12,7 +12,7 @@ interface FeatureGridProps {
  * Rendered tile width: a third of the .container width (see layout.css and
  * feature-grid.css), a single column below 768px.
  */
-const SIZES = '(max-width: 576px) 100vw, (max-width: 768px) 540px, (max-width: 992px) 240px, (max-width: 1200px) 320px, 380px';
+export const SIZES = '(max-width: 576px) 100vw, (max-width: 768px) 540px, (max-width: 992px) 240px, (max-width: 1200px) 320px, 380px';
 
 /**
  * A three-column grid of photographs. Tile identifiers are derived from the

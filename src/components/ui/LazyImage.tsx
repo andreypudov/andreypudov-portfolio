@@ -16,7 +16,7 @@ interface LazyImageProps {
 }
 
 /** Formats image variants as width-descriptor candidates of a srcset attribute. */
-function sourceSet(variants: ImageSource[]): string {
+export function sourceSet(variants: ImageSource[]): string {
   return variants.map((variant) => `${variant.src} ${variant.width}w`).join(', ');
 }
 

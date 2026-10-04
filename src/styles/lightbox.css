@@ -80,7 +80,7 @@
 
         .image-wrapper {
           padding: 0 var(--gap-xxl);
-          display: flex;
+          display: grid;
           flex: 1;
           height: 80vh;
 
@@ -89,6 +89,8 @@
           }
 
           img {
+            /* the original is stacked over the preview, covering it once loaded */
+            grid-area: 1 / 1;
             display: block;
             object-fit: contain;
             width: 100%;

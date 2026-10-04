@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import Lightbox from '@/components/ui/Lightbox';
-import MasonryGrid from '@/components/ui/MasonryGrid';
+import MasonryGrid, { SIZES as MASONRY_GRID_SIZES } from '@/components/ui/MasonryGrid';
 import { pageMetadata } from '@/lib/metadata';
 import { getPhotograph, getPhotographs } from '@/lib/photographs';
 
@@ -174,6 +174,7 @@ export default function PortfolioPage() {
           entryPrefix={`lightbox-${section.id}`}
           tilePrefix={`${section.id}-grid`}
           variant={section.id}
+          sizes={MASONRY_GRID_SIZES}
           key={section.id}
         />
       ))}

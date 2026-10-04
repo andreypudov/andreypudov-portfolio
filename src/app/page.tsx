@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import Carousel from '@/components/ui/Carousel';
-import FeatureGrid from '@/components/ui/FeatureGrid';
+import FeatureGrid, { SIZES as FEATURE_GRID_SIZES } from '@/components/ui/FeatureGrid';
 import ImageGrid from '@/components/ui/ImageGrid';
 import LazyImage from '@/components/ui/LazyImage';
 import Lightbox from '@/components/ui/Lightbox';
@@ -161,7 +161,7 @@ export default function HomePage() {
 
       <Footer />
 
-      <Lightbox photographs={featureGrid} entryPrefix="lightbox" tilePrefix="feature-grid" />
+      <Lightbox photographs={featureGrid} entryPrefix="lightbox" tilePrefix="feature-grid" sizes={FEATURE_GRID_SIZES} />
 
       <VideoLightbox videos={TIMELAPSE_VIDEOS} entryPrefix="lightbox-timelapse" tilePrefix="timelapse-grid" />
     </>
