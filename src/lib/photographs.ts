@@ -105,6 +105,26 @@ export function getPhotographs(fileNames: string[]): Photograph[] {
 }
 
 /**
+ * Embeds the placeholder of a photograph into the page as a data URI, so it
+ * is painted together with the HTML instead of after a separate request.
+ * Meant for the primary image of a page only: the placeholder is downloaded
+ * from the media origin at build time, and a failure fails the build.
+ */
+export async function withInlinePlaceholder(photograph: Photograph): Promise<Photograph> {
+  const response = await fetch(photograph.placeholder.src);
+  if (!response.ok) {
+    throw new Error(`Could not download placeholder "${photograph.placeholder.src}": ${response.status}`);
+  }
+
+  const data = Buffer.from(await response.arrayBuffer()).toString('base64');
+
+  return {
+    ...photograph,
+    placeholder: { ...photograph.placeholder, src: `data:image/webp;base64,${data}` },
+  };
+}
+
+/**
  * Resolves an image that is not part of the photograph albums
  * (e.g. time-lapse covers or curated footer images) with an explicit caption.
  */

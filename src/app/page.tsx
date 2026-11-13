@@ -10,7 +10,7 @@ import Lightbox from '@/components/ui/Lightbox';
 import Parallax from '@/components/ui/Parallax';
 import VideoLightbox, { type Video } from '@/components/ui/VideoLightbox';
 import { pageMetadata } from '@/lib/metadata';
-import { getImage, getPhotograph, getPhotographs, getSelfPortrait } from '@/lib/photographs';
+import { getImage, getPhotograph, getPhotographs, getSelfPortrait, withInlinePlaceholder } from '@/lib/photographs';
 
 const CAROUSEL = [
   '2026-01-22_03-08_001.webp',
@@ -122,8 +122,10 @@ const TIMELAPSE_VIDEOS: Video[] = [
   },
 ];
 
-export default function HomePage() {
-  const carousel = getPhotographs(CAROUSEL);
+export default async function HomePage() {
+  const [first, ...rest] = getPhotographs(CAROUSEL);
+  // The first slide fills the screen on load, so its placeholder ships inside the HTML.
+  const carousel = [await withInlinePlaceholder(first), ...rest];
   const featureGrid = getPhotographs(FEATURE_GRID);
   const covers = TIMELAPSE_COVERS.map((cover) => getImage(cover.path, cover.name));
   const portrait = getSelfPortrait();

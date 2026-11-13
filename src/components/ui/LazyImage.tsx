@@ -31,7 +31,7 @@ export default function LazyImage({ image, priority = false, sizes }: LazyImageP
       <img
         src={image.placeholder.src}
         className="low"
-        loading="lazy"
+        loading={priority ? 'eager' : 'lazy'}
         width={image.placeholder.width}
         height={image.placeholder.height}
         alt=""
