@@ -52,16 +52,18 @@ Senior software engineer with 15 years at Intel, EPAM Systems and Super Group, s
 
   - *Senior Software Development Engineer · DEACON* / 2020/10 – 2021/03 / Nizhny Novgorod, Russia
 
-    Developed a platform for data-driven facility management decision-making for the United States Golf Association, using a scalable microservice architecture on Azure with ASP.NET Core, SQL Server and Kafka.
+    Developed a platform for data-driven facility management decision-making for the United States Golf Association, using a scalable microservice architecture on Azure.
 
     - Designed and maintained RESTful API services, with unit and integration tests in a test-driven environment.
     - Led and mentored a team of interns on RandomCafe, a "random coffee" website designed to foster relationships among company members, from business requirements to meeting deadlines.
+
+    /Stack:/ C#, ASP.NET Core, Entity Framework Core, SQL Server, Kafka, Azure
 
 *** *Intel Corporation*
 
   - *Senior Software Engineer, Technical Lead · OpenCL SDK* / 2018/03 – 2020/10 / Nizhny Novgorod, Russia
 
-    Assumed the role of Team Leader for a newly established team, taking over the Intel SDK for OpenCL Applications (C/C++, C#, Java), Intel's tools for building and debugging OpenCL applications.
+    Assumed the role of Team Leader for a newly established team, taking over the Intel SDK for OpenCL Applications, Intel's tools for building and debugging OpenCL applications.
 
     - As the team's founding member, hired the team together with the manager, growing it to around 20 engineers before it split into two teams of about 12, and mentored the majority of new hires.
     - Delivered support for the latest OpenCL standards across Visual Studio, VS Code, Xcode and Eclipse.
@@ -71,16 +73,20 @@ Senior software engineer with 15 years at Intel, EPAM Systems and Super Group, s
     - Led the resolution of critical security vulnerabilities with other teams, with no impact on release schedules.
     - Managed engagement with key business stakeholders and customers, oversaw product build and distribution, and ensured timely delivery of the final product with all reported blockers resolved.
 
+    /Stack:/ C/C++, C#, Java, OpenCL
+
   - *Senior Software Development Engineer · Intel Registration Center* / 2013/06 – 2018/03 / Nizhny Novgorod, Russia
 
-    Responsible for the design, development and maintenance of the entitlement and download website for Intel software products (C#, ASP.NET MVC, TypeScript), with a focus on the user interface and system APIs.
+    Responsible for the design, development and maintenance of the entitlement and download website for Intel software products, with a focus on the user interface and system APIs.
 
     - Designed a new website architecture using modern user interface technologies.
     - Played a key role in migrating ASP.NET web pages to MVC architecture, which improved website performance, enhanced the user experience and simplified maintenance.
     - Implemented a modern role-based access control model, enabling dynamic management of user access to web pages through role assignments.
     - Developed infrastructure and processes for automated project deployment, ensuring consistent, error-free and reproducible code migrations.
 
-  - *Software Development Engineer · PSET Application Installer (C/C++, Qt)* / 2011/08 – 2013/06 / Nizhny Novgorod, Russia
+    /Stack:/ C#, ASP.NET MVC, SQL Server, TypeScript, Bootstrap
+
+  - *Software Development Engineer · PSET Application Installer* / 2011/08 – 2013/06 / Nizhny Novgorod, Russia
 
     Main developer of licensing and installation technologies for Intel software products on Linux.
 
@@ -88,6 +94,8 @@ Senior software engineer with 15 years at Intel, EPAM Systems and Super Group, s
     - Developed an automated unit test system that improved early bug detection and overall reliability.
     - Implemented the code signing interface in the installation client to support secure software deployment.
     - Developed the Smart Cache and Shell Executor features, reducing initialisation times and improving execution efficiency on Linux.
+
+    /Stack:/ C/C++, Qt, Perl
 
 ** Projects
 

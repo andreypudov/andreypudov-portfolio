@@ -19,7 +19,27 @@
           display: block;
           font-weight: lighter;
         }
+
+        a {
+          color: inherit;
+        }
       }
+    }
+
+    ul {
+      margin: 0 0 1rem var(--gap-lg);
+
+      li {
+        margin-bottom: var(--gap-sm);
+      }
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .stack {
+      color: var(--fg-secondary);
     }
   }
 
@@ -31,6 +51,9 @@
       align-items: start;
 
       .logo {
+        /* Keeps the text aligned when a role has no logo. */
+        width: 48px;
+
         img {
           filter: grayscale(100%);
           width: 48px;

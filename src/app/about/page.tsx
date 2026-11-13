@@ -8,10 +8,172 @@ import { getSelfPortrait } from '@/lib/photographs';
 
 export const metadata: Metadata = pageMetadata({
   title: 'About',
-  description: 'Experience, education and recommendations of Andrey Pudov, senior software engineer and photographer.',
+  description:
+    'Experience, skills, projects, education and recommendations of Andrey Pudov, senior software engineer and photographer.',
   path: '/about/',
   image: getSelfPortrait(),
 });
+
+interface Logo {
+  path: string;
+  alt: string;
+}
+
+interface Role {
+  /** Omitted while the company logo is not in the media bucket. */
+  logo?: Logo;
+  title: string;
+  company: string;
+  dates: string;
+  location: string;
+  summary: string;
+  highlights: string[];
+  stack?: string;
+}
+
+const SUPER_GROUP = { path: '/images/logos/super_group_logo.jpg', alt: 'Super Group Logo' };
+const EPAM = { path: '/images/logos/epam_systems_logo.jpg', alt: 'EPAM Systems Logo' };
+const INTEL = { path: '/images/logos/intel_corporation_logo.jpg', alt: 'Intel Logo' };
+const MADI = { path: '/images/logos/madi_logo.jpg', alt: 'MADI Logo' };
+
+const PROFILE =
+  'Senior software engineer with 15 years at Intel, EPAM Systems and Super Group, strongest in TypeScript, React and Next.js front ends, with back-end experience in C# and a systems background in C/C++. Experienced in turning legacy code into maintainable, observable architecture, taking over established products, building new ones from scratch, and mentoring engineers.';
+
+const SKILLS: Array<[string, string]> = [
+  ['Languages', 'TypeScript, C#'],
+  ['Front end', 'React, Redux, Next.js, Tailwind CSS, Storybook, Chromatic, Figma'],
+  ['Back end', 'ASP.NET Core, REST APIs, microservices, BFF'],
+  ['Data & cloud', 'MongoDB, Azure'],
+  ['Delivery & monitoring', 'GitHub Actions, canary releases, Coralogix, Grafana'],
+  ['Previously', 'C/C++, Java, OpenCL, Qt, Boost, Linux, SQL Server, Entity Framework Core, Kafka'],
+  ['Practices', 'solution architecture, legacy modernisation, performance optimisation, TDD, mentoring'],
+];
+
+const EXPERIENCE: Role[] = [
+  {
+    logo: SUPER_GROUP,
+    title: 'Senior Software Development Engineer · Betway Sports',
+    company: 'Super Group',
+    dates: 'Jan 2025 – present',
+    location: 'Barcelona, Spain',
+    summary:
+      'Front-end engineer in a team of six senior engineers on the core sports betting interface of the Betway platform, at NYSE-listed sports betting and gaming group Super Group (over 6 million monthly active customers). The team assumed ownership of the product and continuously improves it with new features.',
+    highlights: [
+      'Refactored the betting flow into a saga-based design with clear entry, processing and finalisation stages, streamlining it and addressing edge cases to improve reliability and reduce production errors.',
+      'Delivered new betting features, including bet builder and same-game parlays (SGP) with cross-match combinations, and added promotions to the betting flow.',
+      "Built dashboards and alerts for continuous product monitoring on all markets, using Coralogix and clickstream data, giving the team ongoing visibility into the platform's health, so issues are detected as soon as they occur. Wrote the KPI metrics used to reject faulty canary releases.",
+      'Introduced standalone football hubs for the FIFA World Cup 2026, building components and BFF endpoints with designers to combine match information with an easier betting flow. Delivered by the team between January and the start of the tournament, and drew a significant increase in traffic.',
+    ],
+    stack: 'TypeScript, React, Redux, Next.js, Tailwind CSS, Storybook, Azure',
+  },
+  {
+    logo: SUPER_GROUP,
+    title: 'Senior Software Development Engineer · Betway Clips',
+    company: 'Super Group',
+    dates: 'Mar 2021 – Jan 2025',
+    location: 'Barcelona, Spain',
+    summary:
+      'Full-stack engineer with a focus on the front end and founding member of a new R&D team building Betway Clips, a next-generation social networking platform centred on video content. The project was exploratory, so architecture, tooling and product flows had to be established from scratch.',
+    highlights: [
+      'Led the solution architecture, shaped the project structure and defined the UI/UX flows. Drove rapid prototyping to validate ideas early and to ensure the platform could scale to high user engagement.',
+      "Owned the video swiper, the platform's central component: autoplaying videos with liking, commenting, sharing and sport cards tying each video to a match or team. Kept it fast and smooth as it grew.",
+      'Implemented the social interfaces and built responsive components, optimising UI performance for speed and cross-device responsiveness. Refined interaction flows and improved visual consistency.',
+      'Worked within strict browser limits on when and how media may be played, even in in-app browsers: studied how leading platforms address these constraints and applied the most effective techniques, including a shared video element and preloading.',
+      'Designed and implemented high-performance services for media handling, covering the ingestion, processing, storage and retrieval of video, with Azure Media Services and an in-house FFmpeg pipeline encoding to HLS. Optimised how media was stored to keep the platform cost-efficient at scale.',
+      'Introduced automated media pre-validation, using an external AI service to detect inappropriate content, and contributed to content rating through our own statistical neural network models.',
+    ],
+    stack: 'TypeScript, React, Redux, C#, MongoDB, Azure',
+  },
+  {
+    logo: EPAM,
+    title: 'Senior Software Development Engineer · DEACON',
+    company: 'EPAM Systems',
+    dates: 'Oct 2020 – Mar 2021',
+    location: 'Nizhny Novgorod, Russia',
+    summary:
+      'Developed a platform for data-driven facility management decision-making for the United States Golf Association, using a scalable microservice architecture on Azure.',
+    highlights: [
+      'Designed and maintained RESTful API services, with unit and integration tests in a test-driven environment.',
+      'Led and mentored a team of interns on RandomCafe, a “random coffee” website designed to foster relationships among company members, from business requirements to meeting deadlines.',
+    ],
+    stack: 'C#, ASP.NET Core, Entity Framework Core, SQL Server, Kafka, Azure',
+  },
+  {
+    logo: INTEL,
+    title: 'Senior Software Engineer, Technical Lead · OpenCL SDK',
+    company: 'Intel Corporation',
+    dates: 'Mar 2018 – Oct 2020',
+    location: 'Nizhny Novgorod, Russia',
+    summary:
+      "Assumed the role of Team Leader for a newly established team, taking over the Intel SDK for OpenCL Applications, Intel's tools for building and debugging OpenCL applications.",
+    highlights: [
+      "As the team's founding member, hired the team together with the manager, growing it to around 20 engineers before it split into two teams of about 12, and mentored the majority of new hires.",
+      'Delivered support for the latest OpenCL standards across Visual Studio, VS Code, Xcode and Eclipse.',
+      'Worked on the OpenCL debugger for Visual Studio, addressing frequent customer requests.',
+      "Worked with the compiler teams on Intel's transition to its new SYCL-based C and C++ compilers.",
+      'Led the development of new project infrastructure and contributed to the rapid setup of a continuous integration system, significantly reducing build time. Improved code management and review.',
+      'Led the resolution of critical security vulnerabilities with other teams, with no impact on release schedules.',
+      'Managed engagement with key business stakeholders and customers, oversaw product build and distribution, and ensured timely delivery of the final product with all reported blockers resolved.',
+    ],
+    stack: 'C/C++, C#, Java, OpenCL',
+  },
+  {
+    logo: INTEL,
+    title: 'Senior Software Development Engineer · Intel Registration Center',
+    company: 'Intel Corporation',
+    dates: 'Jun 2013 – Mar 2018',
+    location: 'Nizhny Novgorod, Russia',
+    summary:
+      'Responsible for the design, development and maintenance of the entitlement and download website for Intel software products, with a focus on the user interface and system APIs.',
+    highlights: [
+      'Designed a new website architecture using modern user interface technologies.',
+      'Played a key role in migrating ASP.NET web pages to MVC architecture, which improved website performance, enhanced the user experience and simplified maintenance.',
+      'Implemented a modern role-based access control model, enabling dynamic management of user access to web pages through role assignments.',
+      'Developed infrastructure and processes for automated project deployment, ensuring consistent, error-free and reproducible code migrations.',
+    ],
+    stack: 'C#, ASP.NET MVC, SQL Server, TypeScript, Bootstrap',
+  },
+  {
+    logo: INTEL,
+    title: 'Software Development Engineer · PSET Application Installer',
+    company: 'Intel Corporation',
+    dates: 'Aug 2011 – Jun 2013',
+    location: 'Nizhny Novgorod, Russia',
+    summary: 'Main developer of licensing and installation technologies for Intel software products on Linux.',
+    highlights: [
+      'Added key graphical functionality, including an installation wizard that streamlined the creation of product installations.',
+      'Developed an automated unit test system that improved early bug detection and overall reliability.',
+      'Implemented the code signing interface in the installation client to support secure software deployment.',
+      'Developed the Smart Cache and Shell Executor features, reducing initialisation times and improving execution efficiency on Linux.',
+    ],
+    stack: 'C/C++, Qt, Perl',
+  },
+];
+
+const PROJECTS = [
+  {
+    name: 'CoreEQ',
+    url: 'https://github.com/andreypudov/core-eq',
+    description: 'A system-wide audio equalizer for macOS built on Core Audio process taps, with no virtual driver.',
+    stack: 'macOS · Core Audio · Digital signal processing',
+  },
+  {
+    name: 'Spectral Lab',
+    url: 'https://github.com/andreypudov/spectral-lab',
+    description: 'An infrared photography toolkit: a C++23 engine converts infrared raw photos into linear DNG.',
+    stack: 'C++23 · Qt · CMake · GoogleTest',
+  },
+];
+
+const LANGUAGES: Array<[string, string]> = [
+  ['Russian', 'native'],
+  ['English', 'professional (ICAO Level 5)'],
+  ['Japanese', 'beginner (Genki)'],
+];
+
+function Stack({ value }: { value?: string }) {
+  return value ? <p className="stack"><strong>Stack:</strong> {value}</p> : null;
+}
 
 export default function AboutPage() {
   return (
@@ -20,126 +182,68 @@ export default function AboutPage() {
 
       <main>
         <div className="curriculum-vitae container">
+          <section className="profile">
+            <p>{PROFILE}</p>
+          </section>
+
+          <section className="skills">
+            <h1>
+              Skills
+            </h1>
+
+            <ul>
+              {SKILLS.map(([label, value]) => (
+                <li key={label}><strong>{label}:</strong> {value}</li>
+              ))}
+            </ul>
+          </section>
+
           <section className="experience">
             <h1>
               Experience
             </h1>
 
-            <figure>
-              <div className="logo">
-                <img src={mediaUrl('/images/logos/derivco_sports_logo.jpg')} alt="Derivco Sports Logo" />
-              </div>
-              <div className="text">
+            {EXPERIENCE.map((role) => (
+              <figure key={role.title}>
+                <div className="logo">
+                  {role.logo && <img src={mediaUrl(role.logo.path)} alt={role.logo.alt} />}
+                </div>
+                <div className="text">
+                  <figcaption>
+                    {role.title}
+                    <small>{role.company} | {role.dates} | {role.location}</small>
+                  </figcaption>
+
+                  <p>{role.summary}</p>
+
+                  <ul>
+                    {role.highlights.map((highlight) => (
+                      <li key={highlight}>{highlight}</li>
+                    ))}
+                  </ul>
+
+                  <Stack value={role.stack} />
+                </div>
+              </figure>
+            ))}
+          </section>
+
+          <section className="projects">
+            <h1>
+              Projects
+            </h1>
+
+            {PROJECTS.map((project) => (
+              <figure className="entry" key={project.name}>
                 <figcaption>
-                  Sr. Software Development Engineer
-                  <small>Derivco Sports | Mar 2021 – present</small>
+                  <a href={project.url} target="_blank" rel="noopener noreferrer">{project.name}</a>
                 </figcaption>
 
-                <p>
-                  As a founding member of a newly established R&D team at Derivco, I contributed to the design and development of a next-generation social networking platform focused on video content. The project was fully exploratory, requiring architecture and solutions to be built from the ground up. My responsibilities included <strong>leading solution architecture, rapid prototyping, and ensuring the scalability and robustness</strong> of the platform to support high-volume user engagement.
-                </p>
+                <p>{project.description}</p>
 
-                <p>
-                  In my role as a full-stack engineer, I worked across both front-end and back-end domains. On the front-end, I implemented social media interfaces, built responsive components, and optimized <strong>UI performance for speed and cross-device responsiveness</strong>. I also improved the overall user experience by refining interaction flows, enhancing visual consistency, and <strong>prototyping key components</strong> to validate new ideas and features.
-                </p>
-
-                <p>
-                  On the back-end, I was responsible for architecting and implementing <strong>high-performance services for media handling</strong>, covering ingestion, processing, storage, and retrieval of video content. This work required careful attention to performance, scalability, and cost efficiency, and laid the technical foundation for a product that seamlessly integrated social engagement with large-scale video delivery.
-                </p>
-              </div>
-            </figure>
-
-            <figure>
-              <div className="logo">
-                <img src={mediaUrl('/images/logos/epam_systems_logo.jpg')} alt="EPAM Logo" />
-              </div>
-              <div className="text">
-                <figcaption>
-                  Sr. Software Development Engineer
-                  <small>EPAM Systems | Oct 2020 – Mar 2021</small>
-                </figcaption>
-
-                <p>
-                  Developed an innovative platform for <strong>data-driven facility management decision-making</strong> for the United States Golf Association, utilizing a scalable microservice architecture on Microsoft Azure cloud infrastructure. Designed and maintained RESTful API services built on ASP.NET Core, Entity Framework Core, Microsoft SQL Server, Kafka, Autofac, and AutoMapper. Created comprehensive unit and integration <strong>tests within a test-driven development environment</strong> to ensure system reliability.
-                </p>
-
-                <p>
-                  Led and <strong>mentored a team of interns</strong> working on a &quot;random coffee&quot; website designed to foster relationships among company members. Actively participated in gathering and understanding the project's business requirements. Assisted interns in setting both short-term and long-term goals, providing continuous support throughout the project lifecycle. Offered guidance to overcome complex challenges and ensured project deadlines were met.
-                </p>
-              </div>
-            </figure>
-
-            <figure>
-              <div className="logo">
-                <img src={mediaUrl('/images/logos/intel_corporation_logo.jpg')} alt="Intel Logo" />
-              </div>
-              <div className="text">
-                <figcaption>
-                  Senior Software Engineer Technical Lead
-                  <small>Intel Corporation | Mar 2018 – Oct 2020</small>
-                </figcaption>
-
-                <p>
-                  Assumed the role of Team Leader for a newly established team in Nizhny Novgorod. Played an <strong>active role in the hiring and team-building process</strong>, mentoring the majority of newly hired employees to ensure their smooth and efficient integration. Additionally, managed engagement with key business stakeholders and oversaw the organization of product build and distribution processes.
-                </p>
-
-                <p>
-                  Led the development of new project infrastructure and contributed to the <strong>rapid setup of a continuous integration system</strong>, resulting in a significant reduction in project build time. Improved code management and review processes by applying industry-leading development and testing practices.
-                </p>
-
-                <p>
-                  Successfully implemented several business-critical features. Led the quick and effective resolution of critical security vulnerabilities, collaborating with other teams to ensure no impact on release schedules. Coordinated closely with customers, addressing initial feedback on critical issues and ensuring timely delivery of the final product with all reported blockers resolved.
-                </p>
-              </div>
-            </figure>
-
-            <figure>
-              <div className="logo">
-                <img src={mediaUrl('/images/logos/intel_corporation_logo.jpg')} alt="Intel Logo" />
-              </div>
-              <div className="text">
-                <figcaption>
-                  Sr. Software Development Engineer
-                  <small>Intel Corporation | Jun 2013 – Mr 2018</small>
-                </figcaption>
-
-                <p>
-                  Software engineer responsible for the design, development, and maintenance of the Intel Registration Center’s entitlement and download website for Intel software products, with a focus on enhancing both the user interface and system APIs.
-                </p>
-
-                <p>
-                  Designed and developed a new website architecture for the Intel Registration Center, utilizing modern user interface technologies. Played a key role in migrating ASP.NET web pages to MVC architecture, which improved website performance, enhanced the user experience, and simplified maintenance.
-                </p>
-
-                <p>
-                  Implemented a modern role-based access control model, enabling dynamic management of user access to web pages through role assignments.
-                </p>
-
-                <p>
-                  Developed infrastructure and processes for automated project deployment, encompassing source code compilation, configuration file transformations, and publishing to integration servers in both development and pre-production environments. This automation ensures consistent, error-free, and reproducible code migrations.
-                </p>
-              </div>
-            </figure>
-
-            <figure>
-              <div className="logo">
-                <img src={mediaUrl('/images/logos/intel_corporation_logo.jpg')} alt="Intel Logo" />
-              </div>
-              <div className="text">
-                <figcaption>
-                  Software Development Engineer
-                  <small>Intel Corporation | Aug 2011 – Jun 2013</small>
-                </figcaption>
-
-                <p>
-                  Main software developer responsible for licensing and installation technologies for Intel software products on Linux. Spearheaded the addition of critical Graphical User Interface (GUI) functionality. Designed and developed an installation wizard for the installation client, streamlining the product installation creation process. Demonstrated a strong commitment to quality by developing an Automated Unit Test System, improving early-stage bug detection and overall software reliability.
-                </p>
-
-                <p>
-                  Implemented the code signing interface within the installation client, ensuring secure software deployment. Additionally, developed and integrated the Smart Cache and Shell Executor features, significantly reducing initialization times and improving execution efficiency on Linux platforms.
-                </p>
-              </div>
-            </figure>
+                <Stack value={project.stack} />
+              </figure>
+            ))}
           </section>
 
           <section className="education">
@@ -149,35 +253,49 @@ export default function AboutPage() {
 
             <figure className="entry">
               <div className="logo">
-                <img src={mediaUrl('/images/logos/madi_logo.jpg')} alt="MADI Logo" />
+                <img src={mediaUrl(MADI.path)} alt={MADI.alt} />
               </div>
               <div className="text">
                 <figcaption>
-                  Moscow State Automobile and Road Technical Institute
-                  <small>Engineer, Computer Science | Sep 2006 - Jun 2011</small>
+                  Moscow Automobile and Road Construction State Technical University (MADI)
+                  <small>5-year Specialist degree (Engineer), Computer Science | Sep 2006 – Jun 2011</small>
                 </figcaption>
 
                 <p>
-                  Thesis: The use of neural networks in forecasting the stock market and development automated information system for analysis and market forecasting.
+                  Thesis: <em>Neural Networks in Stock Market Forecasting</em>
                 </p>
+
+                <ul>
+                  <li>Researched the application of neural networks to stock market forecasting and developed several predictive models.</li>
+                  <li>Compared model results against traditional technical analysis, demonstrating the clear potential of the neural network approach.</li>
+                  <li>Built an automated information system for market analysis and forecasting.</li>
+                </ul>
               </div>
             </figure>
+          </section>
 
-            <figure className="entry">
-              <div className="logo">
-                <img src={mediaUrl('/images/logos/eas_logo.jpg')} alt="European Aviation School Logo" />
-              </div>
-              <div className="text">
-                <figcaption>
-                  European Aviation School
-                  <small>Pilot | Oct 2022 - Jun 2023</small>
-                </figcaption>
+          <section className="languages">
+            <h1>
+              Languages
+            </h1>
 
-                <p>
-                  Ratings: Private Pilot License (PPL) with Single-Engine Rating (SEL).
-                </p>
-              </div>
-            </figure>
+            <ul>
+              {LANGUAGES.map(([language, level]) => (
+                <li key={language}><strong>{language}</strong> — {level}</li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="interests">
+            <h1>
+              Interests
+            </h1>
+
+            <ul>
+              <li><strong>Aviation (private pilot):</strong> a focus on disciplined planning, checklists and risk management in flight operations.</li>
+              <li><strong>Landscape photography:</strong> see the <a href="/portfolio/">portfolio</a>.</li>
+              <li><strong>Chinese calligraphy:</strong> two years of study in Kaishu (regular script) and Lishu (clerical script).</li>
+            </ul>
           </section>
 
           <section className="recommendations">
