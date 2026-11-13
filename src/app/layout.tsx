@@ -24,7 +24,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <Analytics />
 
+        {/* The page stays hidden until loaded (see site.css); without JavaScript it is shown at once. */}
+        <noscript>
+          <style>{'html:not(.loaded) body { visibility: visible; opacity: 1; } html:not(.loaded)::after { content: none; }'}</style>
+        </noscript>
+
         {children}
+
+        {/* Must stay the last element of the page. */}
+        <script src="/scripts/loader.js"></script>
       </body>
     </html>
   );

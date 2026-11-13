@@ -51,6 +51,78 @@ body {
   color: var(--fg-primary);
   width: 100%;
   overflow-x: hidden;
+  /* Fades the page in once loaded (see the loader below). */
+  transition: opacity var(--transition);
+}
+
+/*
+ * Loader: the page stays hidden until it is fully loaded, eager images
+ * included, so the first view is never painted half-loaded
+ * (public/scripts/loader.js), and then fades in. After 10 seconds it is
+ * shown regardless, in case the script never runs.
+ */
+html {
+  &:not(.loaded) {
+    body {
+      visibility: hidden;
+      opacity: 0;
+      animation: loader-reveal 0s 10s forwards;
+    }
+
+    /*
+     * The spinner, drawn on the root element because the body is hidden. It
+     * only fades in when loading takes longer than half a second, so a fast
+     * load shows nothing but the page fading in.
+     */
+    &::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      width: 32px;
+      height: 32px;
+      box-sizing: border-box;
+      border: 2px solid rgba(33, 37, 41, 0.12);
+      border-top-color: var(--fg-primary);
+      border-radius: 50%;
+      opacity: 0;
+      animation:
+        loader-fade-in 0.6s ease 0.5s forwards,
+        loader-spin 1s linear infinite,
+        loader-hide 0s 10s forwards;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation:
+          loader-fade-in 0.6s ease 0.5s forwards,
+          loader-hide 0s 10s forwards;
+      }
+    }
+  }
+}
+
+@keyframes loader-reveal {
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes loader-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-hide {
+  to {
+    visibility: hidden;
+  }
 }
 
 main {
